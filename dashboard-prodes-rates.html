@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PRODES - taxas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-3.2.0.min.css" />
+   	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
+   	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.css" />
+</head>
+<body>
+<div class="container">
+		<div class="row">
+			<div class="col-md-12 info" style="margin-bottom: 3px;">
+				<span>Taxas de desmatamento anual na Amazonia Legal - Projeto PRODES</span>
+				<a id="modal-718053" href="#modal-container-718053" role="button" class="btn btn-chart-info" data-toggle="modal">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Mais informações sobre a classe Corte Seletivo."></span>
+				</a>
+			</div>
+			<div class="col-md-9">
+				<div id="chart-by-year">
+					<div class="keep-space">
+						<div class="reset" style="display:none;"><b>Filtro:</b> <span class="filter"></span>
+							<a href="javascript:graph.resetFilter('year');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt21" title="Limpar este filtro."></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div id="chart-by-state">
+					<div class="keep-space">
+						<div class="reset" style="display:none;"><b>Filtro:</b> <span class="filter"></span>
+							<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt21" title="Limpar este filtro."></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		  <div class="col-md-12">
+			  <div id="chart-by-year-state"></div>
+		  </div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12 info" style="margin-bottom: 3px;">
+				<span>Tabelas de taxas anuais e variação relativa de desmatamento na Amazonia Legal</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+							<span>Taxas anuais de desmatamento entre <span id="year-range"></span> (km2/ano)</span></a>
+							<span style="clear: both;color: black;position: relative;float: right;">
+								<button id="download" class="btn btn-success btn-lg btn-block" title="Baixar os dados da tabela, em formato CSV.">
+									Download CSV <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+								</button>
+							</span>
+						</h4>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div id="rates-data-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+							<span>Variação relativa da taxa anual de desmatamento (%)</span></a>
+						</h4>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div id="relative-rates-data-table"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div id="footer_print"></div>
+				<div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="rate-infos" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								 
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="rate-infos">
+									<span id="txt22">Informações complementares</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info">
+									<ul>
+										<li>As taxas apresentadas para o ano 1988 são a <strong>média entre 1977 e 1988.</strong></li>
+										<li>As taxas apresentadas para os anos 1993 e 1994 representam a <strong>média entre estes anos.</strong></li>
+										<li>2004 - início do <a href="http://redd.mma.gov.br/pt/acompanhamento-e-a-analise-de-impacto-das-politicas-publicas/ppcdam">PPCDAm</a>.</li>
+									</ul>
+								</div>
+								<div class="alert alert-warning">
+									<strong><span>* </span></strong><span id="txt17">A publicação do ano mais recente, apresenta as taxas estimadas até que as taxas finais sejam liberadas, em junho do ano seguinte.</span>
+								</div>
+								<a target="_blank" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" id="txt24">Informações completas sobre o projeto PRODES</a>
+							</div>
+							<div class="modal-footer">
+								 
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt25">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div id="footer_page"></div>
+<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
+<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
+<script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="./libs/bootstrap/bootstrap-3.2.0.min.js"></script>
+<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
+<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
+<!-- script type="text/javascript" src="./js/svg-to-image.js"></script -->
+<script type="text/javascript" src="./js/prodesDataTable.js"></script>
+<script type="text/javascript" src="./js/dashboard-prodes-rates-datatable.js"></script>
+
+</body>
+</html>
