@@ -348,10 +348,22 @@ var graph={
 				t = "Porcentagem: " + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
 				t = "Estado: " + d.key + "\n" + t + "\n";
 				return t + "Área: " + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
-			})
+			})			
 			.label(function(d) {
-				var t=utils.totalRateCalculator();
-				return d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				var filters = graph.pieTotalizedByState.filters();
+				var localized = false;
+				
+				for(var f = 0; f < filters.length; f++){
+					if(filters[f] === d.key) localized = true; 
+				}
+				
+				var t = utils.totalRateCalculator();
+
+				if(filters.length == 0){
+					return d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				} else {
+					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %" : "";
+				}
 			})
 			.ordinalColors(graph.pallet)
 			.legend(dc.legend().x(1).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
