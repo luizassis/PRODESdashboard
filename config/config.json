@@ -1,4 +1,5 @@
 {
 	"histogramColor": "#4393c3",
-	"pallet": ["#b2182b","#d6604d","#f4a582","#fddbc7","#f7f7f7","#d1e5f0","#92c5de","#4393c3","#2166ac"]
+	"pallet": ["#b2182b","#d6604d","#f4a582","#fddbc7","#f7f7f7","#d1e5f0","#92c5de","#4393c3","#2166ac"],
+	"displayInfo": true
 }
