@@ -45,6 +45,15 @@ var utils = {
 		var footer='Gerado por INPE/OBT/DPI/TerraBrasilis em '+now.toLocaleString()+' sob licença <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">CC BY-SA 4.0</a>';
 		footer_page.innerHTML=footer;
 		footer_print.innerHTML=footer;
+	},
+	/**
+	 * Apply state for HTML information element
+	 * Enable or disable the information about rates estimate.
+	 * @param opt, true or false
+	 */
+	setVisibilityInfo: function(opt) {
+		//graph.displayInfo
+		document.getElementById("warning-msg").style.display=( (opt)?(''):('none') );
 	}
 };
 
@@ -73,6 +82,7 @@ var graph={
 
 	histogramColor: "#ffd700",
 	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	displayInfo: false,
 
 	loadConfigurations: function() {
 		
@@ -81,7 +91,9 @@ var graph={
 			if(conf && conf.histogramColor && conf.pallet) {
 				graph.pallet=conf.pallet;
 				graph.histogramColor=conf.histogramColor;
+				graph.displayInfo=conf.displayInfo;
 			}
+			utils.setVisibilityInfo(graph.displayInfo);
 		});
 		
 	},
@@ -381,6 +393,11 @@ var graph={
 		        saveAs(blob, 'taxas_anuais_prodes.csv');
 		    });
 		
+		d3.select('#prepare_print')
+	    .on('click', function() {
+	    	graph.preparePrint();
+	    });
+		
 		dc.renderAll();
 		this.buildDataTable();
 	},
@@ -399,6 +416,14 @@ var graph={
 			graph.pieTotalizedByState.filterAll();
 		}
 		dc.redrawAll();
+	},
+	preparePrint: function() {
+		d3.select('#print_information').style('display','block');
+		d3.select('#print_page')
+	    .on('click', function() {
+	    	d3.select('#print_information').style('display','none');
+	    	window.print();
+	    });
 	}
 };
 
