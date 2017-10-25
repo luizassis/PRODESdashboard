@@ -71,8 +71,20 @@ var graph={
 	winWidth: window.innerWidth,
 	winHeight: window.innerHeight,
 
+	histogramColor: "#ffd700",
 	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
 
+	loadConfigurations: function() {
+		
+		d3.json("config/config.json", function(error, conf) {
+			if (error) throw error;
+			if(conf && conf.histogramColor && conf.pallet) {
+				graph.pallet=conf.pallet;
+				graph.histogramColor=conf.histogramColor;
+			}
+		});
+		
+	},
 	setDimensions: function(dim) {
 		this.winWidth=dim.w;
 		this.winHeight=dim.h;
@@ -133,6 +145,9 @@ var graph={
 
 		this.yearRateGroup = this.yearDimension.group().reduceSum(function(d) {
 			return +d.rate;
+		});
+		this.yearGroup = this.yearDimension.group().reduceSum(function(d) {
+			return +d.year;
 		});
 		this.ufRateGroup = this.ufDimension.group().reduceSum(function(d) {
 			return +d.rate;
@@ -241,7 +256,7 @@ var graph={
 	        .barPadding(0.3)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
-			.ordinalColors(["gold"]);
+			.ordinalColors([graph.histogramColor]);
 
 		this.barRateByYear
 			.on("renderlet.a",function (chart) {
@@ -250,13 +265,22 @@ var graph={
 					.attr('transform', 'translate(-15,7) rotate(315)');
 			});
 
-
+		var auxYears=[],auxRates=[];
+		graph.yearGroup.all().forEach(function(y){
+			auxYears.push(+y.key);
+			auxRates.push(y.value);
+		});
+		var ordinalScale = d3.scale.ordinal()
+			.domain(auxYears);
+			//.rangePoints([0, 100]);
+		
 		this.lineRateStatesByYear
 			.width(fw)
 			.height(fh)
 			.margins({top: 0, right: 10, bottom: 45, left: 45})
-			.chart(function(c) { return dc.lineChart(c).interpolate('cardinal'); })
-			.x(d3.scale.ordinal())
+			.chart(function(c) { return dc.lineChart(c).interpolate('default'); })
+			.x(ordinalScale)
+			//.x(d3.scale.ordinal())
 	        .xUnits(dc.units.ordinal)
 			.brushOn(false)
 			.yAxisLabel("Desmatamento por Estado (km²/ano)")
@@ -362,6 +386,7 @@ var graph={
 	},
 	init: function() {
 		window.onresize=utils.onResize;
+		this.loadConfigurations();
 		this.loadData();
 	},
 	/*

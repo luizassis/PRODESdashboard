@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-3.2.0.min.css" />
    	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-   	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.min.css" />
+   	<!-- <link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.min.css" /> -->
+   	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.css" />
 </head>
 <body>
 <div class="container">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
-				<span>Taxas de desmatamento anual na Amazonia Legal - Projeto PRODES</span>
+				<span>Taxas anuais de desmatamento na Amazônia Legal - Projeto PRODES</span>
 				<a id="modal-718053" href="#modal-container-718053" role="button" class="btn btn-chart-info" data-toggle="modal">
 					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Mais informações sobre a classe Corte Seletivo."></span>
 				</a>
@@ -43,7 +44,7 @@
 		
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
-				<span>Tabelas de taxas anuais e variação relativa de desmatamento na Amazonia Legal</span>
+				<span>Tabelas de taxas anuais e variações relativas das taxas anuais de desmatamento na Amazônia Legal</span>
 			</div>
 		</div>
 		
@@ -53,10 +54,10 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-							<span>Taxas anuais de desmatamento entre <span id="year-range"></span> (km2/ano)</span></a>
+							<span>Taxas anuais de desmatamento entre <span id="year-range"></span> (km²/ano)</span></a>
 							<span style="clear: both;color: black;position: relative;float: right;">
 								<button id="download" class="btn btn-success btn-lg btn-block" title="Baixar os dados da tabela, em formato CSV.">
-									Download CSV <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+									Baixar CSV <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
 								</button>
 							</span>
 						</h4>
@@ -71,7 +72,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-							<span>Variação relativa da taxa anual de desmatamento (%)</span></a>
+							<span>Variações relativas das taxas anuais de desmatamento (%)</span></a>
 						</h4>
 					</div>
 					<div id="collapse2" class="panel-collapse collapse">
@@ -101,13 +102,13 @@
 							<div class="modal-body">
 								<div class="alert alert-info">
 									<ul>
-										<li>As taxas apresentadas para o ano 1988 são a <strong>média entre 1977 e 1988.</strong></li>
+										<li>A taxa apresentada para o ano 1988 é a <strong>média entre 1977 e 1988.</strong></li>
 										<li>As taxas apresentadas para os anos 1993 e 1994 representam a <strong>média entre estes anos.</strong></li>
 										<li>2004 - início do <a href="http://redd.mma.gov.br/pt/acompanhamento-e-a-analise-de-impacto-das-politicas-publicas/ppcdam">PPCDAm</a>.</li>
 									</ul>
 								</div>
-								<div class="alert alert-warning">
-									<strong><span>* </span></strong><span id="txt17">A publicação do ano mais recente, apresenta as taxas estimadas até que as taxas finais sejam liberadas, em junho do ano seguinte.</span>
+								<div id="warning-msg" class="alert alert-warning">
+									<strong><span>* </span></strong><span id="warning-txt">As taxas de 2017 são estimadas.</span>
 								</div>
 								<a target="_blank" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" id="txt24">Informações completas sobre o projeto PRODES</a>
 							</div>
@@ -133,7 +134,8 @@
 <script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
 <!-- script type="text/javascript" src="./js/svg-to-image.js"></script -->
 <script type="text/javascript" src="./js/prodesDataTable.min.js"></script>
-<script type="text/javascript" src="./js/dashboard-prodes-rates-datatable.min.js"></script>
+<!-- <script type="text/javascript" src="./js/dashboard-prodes-rates-datatable.min.js"></script> -->
+<script type="text/javascript" src="./js/dashboard-prodes-rates-datatable.js"></script>
 
 </body>
 </html>
