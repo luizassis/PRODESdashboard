@@ -87,7 +87,9 @@ var graph={
 	loadConfigurations: function() {
 		
 		d3.json("config/config.json", function(error, conf) {
-			if (error) throw error;
+			if (error) {
+				console.log("Didn't load config file. Using default options.");
+			}
 			if(conf && conf.histogramColor && conf.pallet) {
 				graph.pallet=conf.pallet;
 				graph.histogramColor=conf.histogramColor;
@@ -110,11 +112,20 @@ var graph={
 		this.relativeRatesDataTable = dataTable("relative-rates-data-table");
 	},
 	loadData: function() {
-		// baixar os dados do PRODES!!
-		// http://terrabrasilis.info/fip-service/fip-project-prodes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fip-project-prodes:prodes_rates_d&outputFormat=csv
+		// download data in CSV format from PRODES WFS service.
+		// var url="http://terrabrasilis.info/fip-service/fip-project-prodes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fip-project-prodes:prodes_rates_d&outputFormat=csv";
+		// d3.csv(url, graph.processData);
+		
+		// load data from CSV file
 		d3.csv("data/prodes_rates_d.csv", graph.processData);
-		// http://terrabrasilis.info/prodes-data/PRODES/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=PRODES:prodes_rates_d&outputFormat=application%2Fjson
-		//d3.json("data/prodes_rates.json", graph.processData);
+		
+		// download data in JSON format from PRODES WFS service.
+		// var url="http://terrabrasilis.info/prodes-data/PRODES/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=PRODES:prodes_rates_d&outputFormat=application%2Fjson";
+		// d3.json(url, graph.processData);
+		
+		// load data from JSON file
+		// var url="data/prodes_rates.json";
+		// d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
 		if (error) throw error;
@@ -282,9 +293,9 @@ var graph={
 			auxYears.push(+y.key);
 			auxRates.push(y.value);
 		});
-		var ordinalScale = d3.scale.ordinal()
-			.domain(auxYears);
-			//.rangePoints([0, 100]);
+		var ordinalScale = d3.scale.linear()
+			.domain([auxYears[0] -1,auxYears[auxYears.length-1]+1])
+			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
 		this.lineRateStatesByYear
 			.width(fw)
@@ -293,7 +304,8 @@ var graph={
 			.chart(function(c) { return dc.lineChart(c).interpolate('default'); })
 			.x(ordinalScale)
 			//.x(d3.scale.ordinal())
-	        .xUnits(dc.units.ordinal)
+			//.x(d3.scale.linear().domain([1988, 2017]).range([]))
+	        .xUnits(dc.units.integers)
 			.brushOn(false)
 			.yAxisLabel("Desmatamento por Estado (km²/ano)")
 			.xAxisLabel("Período de monitoramento da Amazônia Legal: " + years[0].key + " - " + years[years.length-1].key)
@@ -329,6 +341,11 @@ var graph={
 			})
 			.legend(dc.legend().x(fw - graph.lineRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 
+		this.lineRateStatesByYear.xAxis().ticks(auxYears.length);
+		this.lineRateStatesByYear.xAxis().tickFormat(function(d) {
+			return d+"";
+		});
+		
 		this.lineRateStatesByYear
 			.on("renderlet.a",function (chart) {
 				// rotate x-axis labels
@@ -416,7 +433,12 @@ var graph={
 	init: function() {
 		window.onresize=utils.onResize;
 		this.loadConfigurations();
-		this.loadData();
+		try{
+			this.loadData();
+		}catch (e) {
+			// TODO: handle exception
+			
+		}
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.
@@ -439,4 +461,14 @@ var graph={
 	}
 };
 
-graph.init();
+window.onload=function(){
+	Mousetrap.bind(['command+p', 'ctrl+p'], function() {
+        console.log('command p or control p');
+        // return false to prevent default browser behavior
+        // and stop event from bubbling
+        return false;
+    });
+
+	Lang.init();
+	graph.init();
+};
