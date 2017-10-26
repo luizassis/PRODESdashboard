@@ -3,6 +3,8 @@ body{
 	background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: rgb(57, 104, 88);
+    color: white;
 }
 .container{
 	margin-right: 10px;
@@ -27,8 +29,8 @@ body{
 .dc-chart rect.bar {
 	fill-opacity: 0.8;
 }
-.dc-chart .pie-slice, .dc-chart g.row text{
-	fill: black;
+.dc-chart .pie-slice, .dc-chart g.row text, svg text{
+	fill: white;
 }
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
@@ -36,6 +38,7 @@ body{
 .navbar-inverse .navbar-brand {
     color: #f5f5f5;
 }
+
 #print_information{
 	width: 100%;
 	height: 100%;
@@ -63,14 +66,13 @@ body{
 	color: #333;
 }
 .reset{
-	background-color: rgb(220, 241, 186);
+	background-color: #1C5D8C;
 	border-radius: 8px;
-	border: rgb(187, 224, 123) solid 1px;
-	fill: black;
+	border: rgb(122, 165, 185) solid 1px;
 	font-size: x-small;
 }
 .glyphicon{
-	color: #368fb3;
+	color: white;
 }
 .info{
 	text-align: center;
@@ -85,6 +87,9 @@ body{
 .table-header{
 	font-weight:bold;
 	background-color: rgba(130, 179, 181, 0.49);
+}
+.table-hover tbody tr:hover td{
+	color: #4d4d4d;
 }
 .panel{
 	background-color: transparent;

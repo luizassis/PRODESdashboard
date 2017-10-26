@@ -65,7 +65,7 @@ var dataTable = function(divId) {
 					theader = document.createElement("tr");
 					theader.setAttribute('class', 'table-header');
 					var th = document.createElement("th");
-					th.innerText="Ano / Estado";
+					th.innerText=Translation[Lang.language].tableYearState;
 					theader.appendChild(th);
 					hasTableHeader=true;
 				}

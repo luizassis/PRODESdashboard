@@ -2,6 +2,7 @@ var utils = {
 	config:{},
 	printWindow:null,
 	statusPrint:false,
+	cssDefault:true,
 	setConfig: function(config) {
 		utils.config=config;
 	},
@@ -42,18 +43,24 @@ var utils = {
 		//footer_page.style.top=h+"px";
 		footer_print.style.width=window.innerWidth+"px";
 		var now=new Date();
-		var footer='Gerado por INPE/OBT/DPI/TerraBrasilis em '+now.toLocaleString()+' sob licença <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">CC BY-SA 4.0</a>';
+		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
 		footer_page.innerHTML=footer;
 		footer_print.innerHTML=footer;
 	},
 	/**
-	 * Apply state for HTML information element
-	 * Enable or disable the information about rates estimate.
-	 * @param opt, true or false
+	 * Apply configurations to UI
+	 * - Enable or disable the information about rates estimate.
+	 * - Enable or disable the panel swap button.
 	 */
-	setVisibilityInfo: function(opt) {
-		//graph.displayInfo
-		document.getElementById("warning-msg").style.display=( (opt)?(''):('none') );
+	applyConfigurations: function() {
+		document.getElementById("warning-msg").style.display=( (graph.displayInfo)?(''):('none') );
+		document.getElementById("panel_swap").style.display=( (graph.displaySwapPanelButton)?(''):('none') );
+	},
+	changeCss: function(bt) {
+		utils.cssDefault=!utils.cssDefault;
+		document.getElementById('stylesheet_dash').href='./css/dashboard-prodes-rates'+((utils.cssDefault)?(''):('-dark'))+'.css';
+		bt.style.display='none';
+		setTimeout(bt.style.display='',200);
 	}
 };
 
@@ -83,6 +90,7 @@ var graph={
 	histogramColor: "#ffd700",
 	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
 	displayInfo: false,
+	displaySwapPanelButton: false,
 
 	loadConfigurations: function() {
 		
@@ -90,12 +98,13 @@ var graph={
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
 			}
-			if(conf && conf.histogramColor && conf.pallet) {
-				graph.pallet=conf.pallet;
-				graph.histogramColor=conf.histogramColor;
-				graph.displayInfo=conf.displayInfo;
+			if(conf) {
+				graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+				graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+				graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
+				graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
 			}
-			utils.setVisibilityInfo(graph.displayInfo);
+			utils.applyConfigurations();
 		});
 		
 	},
@@ -220,7 +229,7 @@ var graph={
 
 			data2Table.push({
 				uf:uf,
-				year:'Acumulado:',
+				year:Translation[Lang.language].cumulate,
 				rate:localeBR.numberFormat(',1f')(total[uf])
 			});
 		});
@@ -259,12 +268,12 @@ var graph={
 			.height(fh)
 			.width(parseInt( (fw/4) * 3))
 			.margins({top: 0, right: 10, bottom: 45, left: 45})
-			.yAxisLabel("Desmatamento total anual (km²/ano)")
-			.xAxisLabel("Período de monitoramento da Amazônia Legal: " + years[0].key + " - " + years[years.length-1].key)
+			.yAxisLabel(Translation[Lang.language].barYAxis)
+			.xAxisLabel(Translation[Lang.language].barXAxis + years[0].key + " - " + years[years.length-1].key)
 			.dimension(this.yearDimension)
 			.group(this.yearRateGroup)
 			.title(function(d) {
-				return "Área: " + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(1)))) + " km²";
+				return Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(1)))) + " km²";
 			})
 			.label(function(d) {
 				var t=Math.abs((d.data.value/1000).toFixed(1));
@@ -293,7 +302,7 @@ var graph={
 			auxYears.push(+y.key);
 			auxRates.push(y.value);
 		});
-		var ordinalScale = d3.scale.linear()
+		var xScale = d3.scale.linear()
 			.domain([auxYears[0] -1,auxYears[auxYears.length-1]+1])
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
@@ -302,19 +311,16 @@ var graph={
 			.height(fh)
 			.margins({top: 0, right: 10, bottom: 45, left: 45})
 			.chart(function(c) { return dc.lineChart(c).interpolate('default'); })
-			.x(ordinalScale)
-			//.x(d3.scale.ordinal())
-			//.x(d3.scale.linear().domain([1988, 2017]).range([]))
-	        .xUnits(dc.units.integers)
+			.x(xScale)
 			.brushOn(false)
-			.yAxisLabel("Desmatamento por Estado (km²/ano)")
-			.xAxisLabel("Período de monitoramento da Amazônia Legal: " + years[0].key + " - " + years[years.length-1].key)
+			.yAxisLabel(Translation[Lang.language].lineYAxis)
+			.xAxisLabel(Translation[Lang.language].lineXAxis + years[0].key + " - " + years[years.length-1].key)
 			.renderHorizontalGridLines(true)
 			.renderVerticalGridLines(true)
 			.title(function(d) {
-				return "Estado: "+ d.key[0] + "\n" +
-					"Ano: "+ d.key[1] + "\n" +
-					"Área: " + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
+				return Translation[Lang.language].state + d.key[0] + "\n" +
+				Translation[Lang.language].year + d.key[1] + "\n" +
+				Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})
 			.elasticY(true)
 			.yAxisPadding('10%')
@@ -362,9 +368,9 @@ var graph={
 			.group(this.ufRateGroup)
 			.title(function(d) {
 				var t=utils.totalRateCalculator();
-				t = "Porcentagem: " + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
-				t = "Estado: " + d.key + "\n" + t + "\n";
-				return t + "Área: " + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
+				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				t = Translation[Lang.language].state + d.key + "\n" + t + "\n";
+				return t + Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})			
 			.label(function(d) {
 				var filters = graph.pieTotalizedByState.filters();
@@ -387,48 +393,9 @@ var graph={
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
 		
-		// build download data
-		d3.select('#download')
-		    .on('click', function() {
-		    	var ufs=[],years=[],rates=[];
-		    	
-		    	graph.data2csv.forEach(function(d) {
-		    		if(ufs.indexOf(d.uf)<0){
-		    			ufs.push(d.uf);
-		    			rates[d.uf]=[]
-		    		}
-		    		if(years.indexOf(d.year)<0){
-		    			years.push(d.year);
-		    		}
-		    		
-	    			rates[d.uf][d.year]=d.originalRate;
-				});
-		    	var csv=[],aux={};
-		    	ufs.forEach(function(u) {
-			    	years.forEach(function(y) {
-			    		if(aux[y]) {
-			    			c=aux[y];
-			    		}else{
-			    			var c={};
-			    			c['year']=y;
-			    			aux[y]=c;
-			    		}
-			    		c[u]=rates[u][y];
-			    	});
-		    	});
-		    	for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-
-		        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, 'taxas_anuais_prodes.csv');
-		    });
-		
-		d3.select('#prepare_print')
-	    .on('click', function() {
-	    	graph.preparePrint();
-	    });
-		
 		dc.renderAll();
 		this.buildDataTable();
+		this.prepareTools();
 	},
 	init: function() {
 		window.onresize=utils.onResize;
@@ -451,12 +418,84 @@ var graph={
 		}
 		dc.redrawAll();
 	},
+	prepareTools: function() {
+		// build download data
+		d3.select('#downloadTableBtn')
+	    .on('click', function() {
+	    	var ufs=[],years=[],rates=[];
+	    	
+	    	graph.data2csv.forEach(function(d) {
+	    		if(ufs.indexOf(d.uf)<0){
+	    			ufs.push(d.uf);
+	    			rates[d.uf]=[]
+	    		}
+	    		if(years.indexOf(d.year)<0){
+	    			years.push(d.year);
+	    		}
+	    		
+    			rates[d.uf][d.year]=d.originalRate;
+			});
+	    	var csv=[],aux={};
+	    	ufs.forEach(function(u) {
+		    	years.forEach(function(y) {
+		    		if(aux[y]) {
+		    			c=aux[y];
+		    		}else{
+		    			var c={};
+		    			c['year']=y;
+		    			aux[y]=c;
+		    		}
+		    		c[u]=rates[u][y];
+		    	});
+	    	});
+	    	for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
+
+	        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+	        var dt=new Date();
+	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+	        saveAs(blob, 'prodes_rates_'+dt+'.csv');
+	    });
+		
+		d3.select('#prepare_print')
+	    .on('click', function() {
+	    	graph.preparePrint();
+	    });
+		
+		d3.select('#change_style')
+	    .on('click', function() {
+	    	utils.changeCss(this);
+	    });
+		
+		d3.select('#panel_swap')
+	    .on('click', function() {
+	    	window.location='?type=default';
+	    });
+		
+		this.jsLanguageChange();
+	},
 	preparePrint: function() {
 		d3.select('#print_information').style('display','block');
 		d3.select('#print_page')
 	    .on('click', function() {
 	    	d3.select('#print_information').style('display','none');
 	    	window.print();
+	    });
+	},
+	jsLanguageChange: function() {
+		var callback = function() {
+			graph.build();
+		};
+		d3.select('#flag-pt-br')
+	    .on('click', function() {
+	    	Lang.change('pt-br', callback);
+	    });
+		d3.select('#flag-en')
+	    .on('click', function() {
+	    	Lang.change('en', callback);
+	    });
+		d3.select('#flag-es')
+	    .on('click', function() {
+	    	Lang.change('es', callback);
 	    });
 	}
 };
@@ -471,4 +510,5 @@ window.onload=function(){
 
 	Lang.init();
 	graph.init();
+	Lang.apply();// apply from previous selection
 };
