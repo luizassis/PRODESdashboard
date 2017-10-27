@@ -60,7 +60,7 @@ var utils = {
 		utils.cssDefault=!utils.cssDefault;
 		document.getElementById('stylesheet_dash').href='./css/dashboard-prodes-rates'+((utils.cssDefault)?(''):('-dark'))+'.css';
 		bt.style.display='none';
-		setTimeout(bt.style.display='',200);
+		setTimeout(function(){bt.style.display='';},200);
 	}
 };
 
@@ -88,7 +88,9 @@ var graph={
 	winHeight: window.innerHeight,
 
 	histogramColor: "#ffd700",
+	darkHistogramColor: "#ffd700",
 	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	darkPallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
 	displayInfo: false,
 	displaySwapPanelButton: false,
 
@@ -100,7 +102,9 @@ var graph={
 			}
 			if(conf) {
 				graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+				graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
 				graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+				graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
 				graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
 				graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
 			}
@@ -288,7 +292,7 @@ var graph={
 	        .barPadding(0.3)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
-			.ordinalColors([graph.histogramColor]);
+			.ordinalColors([(utils.cssDefault)?(graph.histogramColor):(graph.darkHistogramColor)]);
 
 		this.barRateByYear
 			.on("renderlet.a",function (chart) {
@@ -336,7 +340,7 @@ var graph={
 			.valueAccessor(function(d) {
 				return +d.value;
 			})
-			.ordinalColors(graph.pallet)
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.seriesSort(function(a,b) {
 				var rank=graph.ufRateGroup.top(Infinity);
 				var sr=[];
@@ -388,7 +392,7 @@ var graph={
 					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %" : "";
 				}
 			})
-			.ordinalColors(graph.pallet)
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.legend(dc.legend().x(1).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
@@ -464,6 +468,7 @@ var graph={
 		d3.select('#change_style')
 	    .on('click', function() {
 	    	utils.changeCss(this);
+	    	graph.build();
 	    });
 		
 		d3.select('#panel_swap')

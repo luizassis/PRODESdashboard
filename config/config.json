@@ -1,6 +1,8 @@
 {
 	"histogramColor": "#4393c3",
-	"pallet": ["#b2182b","#d6604d","#f4a582","#fddbc7","#f7f7f7","#d1e5f0","#92c5de","#4393c3","#2166ac"],
+	"darkHistogramColor": "gold",
+	"pallet": ["#ff1b38","#fc755f","#d39b59","#a75145","#ffa500","#ffe000","#bea3f6","#44acdb","#008000"],
+	"darkPallet": ["#d73027","#f46d43","#fdae61","#fee090","#ffffbf","#e0f3f8","#abd9e9","#74add1","#4575b4"],
 	"displayInfo": true,
 	"displaySwapPanelButton": true
 }
