@@ -29,6 +29,7 @@ body{
 }
 .dc-chart .pie-slice, .dc-chart g.row text{
 	fill: black;
+	font-size: smaller;
 }
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
@@ -107,6 +108,7 @@ body{
 #footer_page{
 	text-align: center;
 	color: gray;
+	position: absolute;
 	width: 98%;
 	border-top: rgb(187, 224, 123) solid 1px;
 	left: 1%;
