@@ -96,19 +96,20 @@ var graph={
 
 	loadConfigurations: function() {
 		
-		d3.json("config/config.json", function(error, conf) {
+		d3.json("config/config-rates.json", function(error, conf) {
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
+			}else {
+				if(conf) {
+					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+					graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
+					graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
+				}
+				utils.applyConfigurations();
 			}
-			if(conf) {
-				graph.pallet=conf.pallet?conf.pallet:graph.pallet;
-				graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
-				graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
-				graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
-				graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
-				graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
-			}
-			utils.applyConfigurations();
 		});
 		
 	},
