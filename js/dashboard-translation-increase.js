@@ -1,8 +1,8 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
-		'txt1':'Taxas de desmatamento',
-		'txt2':'Áreas de incremento de desmatamento',
+		'txt1':'PRODES Amazônia',
+		'txt2':'Acessar o painel de taxas',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
 		'txt5':'Escuro/Claro',
@@ -36,11 +36,10 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt31':'Imprimir',
-		"warning-txt":'As taxas de 2017 ainda são estimativas.',
 		/* titles for HTML entities */
-		'panel_swap':'Ir para o painel de incrementos anuais de desmatamento.',
+		'panel_swap':'Ir para o painel de taxas anuais de desmatamento.',
 		'downloadBtn':'Baixar a tabela de taxas de desmatamento em formato CSV.',
-		'prepare_print':'Imprimir esta página utilizando o recurso do navegador.',
+		'prepare_print':'Imprimir esta página utilizando recurso do navegador.',
 		'change_style':'Alternar o estilo de apresentação escuro/claro.',
 		'display_warning':'Clique para ver mais informações sobre as taxas.',
 		'downloadTableBtn':'Baixar a tabela de taxas de desmatamento em formato CSV.',
@@ -119,7 +118,7 @@ var Translation={
 		'lineXAxis':'Brazilian Legal Amazon Monitoring Period: ',
 		'tableYearState':'Year / State'
 	},
-	'sp':{		
+	'es':{		
 		/* texts into HTML entities */
 		'txt1':'PRODES Panel - rates',
 		'txt2':'Increase panel',

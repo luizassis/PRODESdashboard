@@ -2,6 +2,7 @@ var utils = {
 	config:{},
 	printWindow:null,
 	statusPrint:false,
+	cssDefault:true,
 	setConfig: function(config) {
 		utils.config=config;
 	},
@@ -40,6 +41,35 @@ var utils = {
 					.slice(0, n);
 			}
 		};
+	},
+	addGenerationDate: function() {
+		var footer_page=document.getElementById("footer_page");
+		var footer_print=document.getElementById("footer_print");
+		if(!footer_page || !footer_print) {
+			return;
+		}
+		var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
+		//footer_page.style.top=h+"px";
+		footer_print.style.width=window.innerWidth+"px";
+		var now=new Date();
+		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
+		footer_page.innerHTML=footer;
+		footer_print.innerHTML=footer;
+	},
+	/**
+	 * Apply configurations to UI
+	 * - Enable or disable the information about rates estimate.
+	 * - Enable or disable the panel swap button.
+	 */
+	applyConfigurations: function() {
+		//document.getElementById("warning-msg").style.display=( (graph.displayInfo)?(''):('none') );
+		document.getElementById("panel_swap").style.display=( (graph.displaySwapPanelButton)?(''):('none') );
+	},
+	changeCss: function(bt) {
+		utils.cssDefault=!utils.cssDefault;
+		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-prodes-increase-dark.css'));
+		bt.style.display='none';
+		setTimeout(function(){bt.style.display='';},200);
 	}
 };
 
@@ -64,8 +94,36 @@ var graph={
 	winWidth: window.innerWidth,
 	winHeight: window.innerHeight,
 	
-	pallet: ["#FF0000","#FF4500","#ff6a00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	histogramColor: "#ffd700",
+	darkHistogramColor: "#ffd700",
+	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	darkPallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	barTop10Color: "#b8b8b8",
+	darkBarTop10Color: "#c9c9c9",
+	displayInfo: false,
+	displaySwapPanelButton: false,
 	
+	loadConfigurations: function() {
+		
+		d3.json("config/config-increase.json", function(error, conf) {
+			if (error) {
+				console.log("Didn't load config file. Using default options.");
+			}else {
+				if(conf) {
+					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+					graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
+					graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
+					graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
+					graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
+				}
+				utils.applyConfigurations();
+			}
+		});
+		
+	},
 	setDimensions: function(dim) {
 		this.winWidth=dim.w;
 		this.winHeight=dim.h;
@@ -76,15 +134,6 @@ var graph={
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
 		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
 		this.rowTop10ByUc = dc.rowChart("#chart-by-uc");
-	},
-	getOrdinalColorsToYears: function(itens) {
-		var c=[];
-		var ys=graph.yearDimension.group().all();
-		var cor=graph.pallet;
-		for(var i=0;i<ys.length;i++) {
-			c.push({key:ys[i].key,color:cor[i]});
-		}
-		return c;
 	},
 	loadData: function() {
 		// Download the deforestation data from PRODES WFS service.
@@ -146,8 +195,7 @@ var graph={
 	},
 	build: function() {
 		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
-		h=parseInt(this.winHeight * 0.3),
-		barColors = this.getOrdinalColorsToYears();
+		h=parseInt(this.winHeight * 0.3);
 		
 		this.setChartReferencies();
 		
@@ -164,20 +212,20 @@ var graph={
 			fw = chartByYear.clientWidth;
 		}
 
-		utils.setTitle('year','Incremento anual no desmatamento da Amazonia Legal');
+		utils.setTitle('year','Desmatamento Anual');
 		
 		this.barAreaByYear
 			.height(fh)
 			.width(fw)
 			.yAxisLabel("Incremento no desmatamento (km²)")
-			.xAxisLabel("Ano de apuração do incremento")
+			.xAxisLabel("Ano de apuração do desmatamento")
 			.dimension(this.yearDimension)
 			.group(utils.snapToZero(this.yearAreaMunGroup))
 			.title(function(d) {
-				return "Área: " + Math.abs(+(d.value.toFixed(2))) + " km²";
+				return "Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return parseInt(Math.round(+d.data.value));
+				return localeBR.numberFormat(',1f')(Math.round(d.data.value)) + " km²";
 			})
 			.elasticY(true)
 			.yAxisPadding('10%')
@@ -186,11 +234,11 @@ var graph={
 	        .barPadding(0.2)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
-			.ordinalColors(["gold"]);
+			.ordinalColors([(utils.cssDefault)?(graph.histogramColor):(graph.darkHistogramColor)]);
 
 		this.barAreaByYear.margins().left += 30;
 	
-		utils.setTitle('state','Incremento total do desmatamento por Estado');
+		utils.setTitle('state','Desmatamento Total por Estado');
 		
 		this.pieTotalizedByState
 			.height(fh)
@@ -200,12 +248,13 @@ var graph={
 			.dimension(this.ufDimension)
 			.group(this.ufAreaMunGroup)
 			.title(function(d) {
-				return "Área: " + Math.abs(+(d.value.toFixed(2))) + " km²";
+				return "Estado: " + d.key + "\n" +
+				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return d.key + ":" + parseInt(Math.round(+d.value));
+				return d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²";
 			})
-			.ordinalColors(graph.pallet)
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.legend(dc.legend());
 
 		
@@ -225,13 +274,14 @@ var graph={
 			.dimension(this.munDimension)
 			.group(utils.snapToZero(this.munAreaMunGroup))
 			.title(function(d) {
-				return "Área: " + Math.abs(+(d.value.toFixed(2))) + " km²";
+				return "Município/Estado: " + d.key + "\n" +
+				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return d.key + ": " + parseInt(Math.round(+d.value)) + " km²";
+				return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";;
 			})
 			.elasticX(true)
-			.ordinalColors(["#9e9fc2"])
+			.ordinalColors([(utils.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)])
 			.ordering(function(d) {
 				return d.value;
 			})
@@ -244,9 +294,6 @@ var graph={
 		});
 
 		this.rowTop10ByMun.xAxis().tickFormat(function(d) {
-			/*var t=d/1000;
-			t=(t<1?d:t+"k");
-			return t;*/
 			return d;
 		}).ticks(5);
 
@@ -260,15 +307,14 @@ var graph={
 			.dimension(this.ucDimension)
 			.group(utils.snapToZero(this.ucAreaUcGroup))
 			.title(function(d) {
-				return "Área: " + Math.abs(+(d.value.toFixed(2))) + " km²";
+				return "Área de Proteção/Estado: " + d.key + "\n" +
+				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				var t=parseFloat((+d.value).toFixed(2));
-				t=localeBR.numberFormat(',1f')(t) + " km²";
-				return d.key + ": " + t;
+				return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.elasticX(true)
-			.ordinalColors(["#9e9fc2"])
+			.ordinalColors([(utils.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)])
 			.ordering(function(d) {
 				return d.value;
 			})
@@ -290,10 +336,18 @@ var graph={
 		}).ticks(5);
 		
 		dc.renderAll();
+		utils.addGenerationDate();
+		this.prepareTools();
 	},
 	init: function() {
 		window.onresize=utils.onResize;
-		this.loadData();
+		this.loadConfigurations();
+		try{
+			this.loadData();
+		}catch (e) {
+			// TODO: handle exception
+			
+		}
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.
@@ -309,7 +363,99 @@ var graph={
 			graph.rowTop10ByUc.filterAll();
 		}
 		dc.redrawAll();
+	},
+	prepareTools: function() {
+		// build download data
+		d3.select('#downloadTableBtn')
+	    .on('click', function() {
+	    	var ufs=[],years=[],rates=[];
+	    	
+	    	graph.data2csv.forEach(function(d) {
+	    		if(ufs.indexOf(d.uf)<0){
+	    			ufs.push(d.uf);
+	    			rates[d.uf]=[]
+	    		}
+	    		if(years.indexOf(d.year)<0){
+	    			years.push(d.year);
+	    		}
+	    		
+    			rates[d.uf][d.year]=d.originalRate;
+			});
+	    	var csv=[],aux={};
+	    	ufs.forEach(function(u) {
+		    	years.forEach(function(y) {
+		    		if(aux[y]) {
+		    			c=aux[y];
+		    		}else{
+		    			var c={};
+		    			c['year']=y;
+		    			aux[y]=c;
+		    		}
+		    		c[u]=rates[u][y];
+		    	});
+	    	});
+	    	for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
+
+	        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+	        var dt=new Date();
+	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+	        saveAs(blob, 'prodes_rates_'+dt+'.csv');
+	    });
+		
+		d3.select('#prepare_print')
+	    .on('click', function() {
+	    	graph.preparePrint();
+	    });
+		
+		d3.select('#change_style')
+	    .on('click', function() {
+	    	utils.changeCss(this);
+	    	graph.build();
+	    });
+		
+		d3.select('#panel_swap')
+	    .on('click', function() {
+	    	window.location='?type=rates';
+	    });
+		
+		this.jsLanguageChange();
+	},
+	preparePrint: function() {
+		d3.select('#print_information').style('display','block');
+		d3.select('#print_page')
+	    .on('click', function() {
+	    	d3.select('#print_information').style('display','none');
+	    	window.print();
+	    });
+	},
+	jsLanguageChange: function() {
+		var callback = function() {
+			graph.build();
+		};
+		d3.select('#flag-pt-br')
+	    .on('click', function() {
+	    	Lang.change('pt-br', callback);
+	    });
+		d3.select('#flag-en')
+	    .on('click', function() {
+	    	Lang.change('en', callback);
+	    });
+		d3.select('#flag-es')
+	    .on('click', function() {
+	    	Lang.change('es', callback);
+	    });
 	}
 };
 
-graph.init();
+window.onload=function(){
+	Mousetrap.bind(['command+p', 'ctrl+p'], function() {
+        console.log('command p or control p');
+        // return false to prevent default browser behavior
+        // and stop event from bubbling
+        return false;
+    });
+
+	Lang.init();
+	graph.init();
+	Lang.apply();// apply from previous selection
+};
