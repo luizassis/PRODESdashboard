@@ -37,6 +37,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt31':'Imprimir',
 		"warning-txt":'As taxas de 2017 ainda são estimativas.',
+		'txt32':'Nota: Clique no texto para expandir/colapsar os painéis.',
 		/* titles for HTML entities */
 		'panel_swap':'Ir para o painel de incrementos anuais de desmatamento.',
 		'downloadBtn':'Baixar a tabela de taxas de desmatamento em formato CSV.',
@@ -75,7 +76,7 @@ var Translation={
 		'txt12':'Clean this filter.',
 		'txt13':'Download the series chart image in a PNG format.',
 		'txt14':'Download the pie chart image in a PNG format.',
-		'txt15':'Annual deforestation rate and relative variation of Brazilian Legal Amazon',
+		'txt15':'Annual deforestation rate and relative variation of Brazilian Legal Amazon (AMZ)',
 		'txt16':'Annual deforestation rate between <span id="year-range"></span> (km²/year)',
 		'txt17':'Download CSV',
 		'txt18':'Relative variations of the annual deforestation rate (%)',
@@ -97,6 +98,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- Paper margins: browser default values.<br />',
 		'txt31':'Print',
 		"warning-txt":'2017 deforestation rate is still an estimation.',
+		'txt32':'Note: Click on the text to expand/collapse the panels.',
 		/* titles for HTML entities */
 		'panel_swap':'Go to the deforestation increment rate panel.',
 		'downloadBtn':'Download the deforestation rates table in a CSV format.',

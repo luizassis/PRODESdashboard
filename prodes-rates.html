@@ -11,12 +11,11 @@
    	<link rel="stylesheet" type="text/css" href="./css/dashboard-print.css" media="print" />
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid" style="clear: both; color: black;">
-			<div class="navbar-header">
-				<!--<a class="navbar-brand" href="#"><span id="txt1">Painel PRODES - taxas</span></a>-->
-				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="62" width="62" ><a class="navbar-brand" href="#"></a>
-				<a class="navbar-brand" id="txt1">Painel PRODES - taxas</span>
+	<nav class="navbar navbar-inverse">  	
+		<div class="container-fluid" style="clear: both; color: black;">				
+			<div class="navbar-header">									
+				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" /></a>
+				<span class="navbar-brand" id="txt1">Painel PRODES - taxas</span>
 			</div>
 			<ul class="nav navbar-nav">
 				<li>
@@ -49,9 +48,9 @@
 				</a></li>
 				<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
 			</ul>
+
 		</div>
 	</nav>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
@@ -102,8 +101,10 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-							<span id="txt16">Taxas anuais de desmatamento entre <span id="year-range"></span> (km²/ano)</span></a>
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">								
+								<i class="glyphicon glyphicon-plus" style="color:black"></i>
+								<span id="txt16">Taxa anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
+							</a>
 							<span style="clear: both;color: black;position: relative;float: right;">
 								<button id="downloadTableBtn" class="btn btn-success btn-sm btn-block" title="Baixar os dados da tabela, em formato CSV.">
 									<span id="txt17">Baixar CSV</span> <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -121,6 +122,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+							<span id="" class="glyphicon glyphicon-plus" style="color:black"></span> 
 							<span id="txt18">Variações relativas das taxas anuais de desmatamento (%)</span></a>
 						</h4>
 					</div>
@@ -132,6 +134,8 @@
 				</div>
 			</div>
 		</div>
+		<p id="txt32"><strong>Nota:</strong> Clique no texto para expandir/colapsar os painéis.</p>
+
 
 		<div class="row">
 			<div class="col-md-12">
