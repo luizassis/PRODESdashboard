@@ -1,0 +1,8 @@
+{
+	"histogramColor": "#4393c3",
+	"darkHistogramColor": "gold",
+	"pallet": ["#ff1b38","#fc755f","#d39b59","#a75145","#ffa500","#ffe000","#bea3f6","#44acdb","#008000"],
+	"darkPallet": ["#d73027","#f46d43","#fdae61","#fee090","#ffffbf","#e0f3f8","#abd9e9","#74add1","#4575b4"],
+	"displayInfo": true,
+	"displaySwapPanelButton": true
+}

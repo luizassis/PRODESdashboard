@@ -87,7 +87,7 @@ var graph={
 
 	yearRateGroup: null,
 	ufRateGroup: null,
-	stateYearRateGroup: null,
+	stateYearRateGroup: null, 
 
 	data:null,
 	data_all:null,

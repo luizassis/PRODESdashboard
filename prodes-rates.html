@@ -5,52 +5,53 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-3.2.0.min.css" />
    	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-   	<!-- <link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.min.css" /> -->
-   	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.css" id="stylesheet_dash" />
+	<!-- <link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.min.css" /> -->
+	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+   	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.css" />
    	<link rel="stylesheet" type="text/css" href="./css/dashboard-print.css" media="print" />
 </head>
 <body>
-<nav class="navbar navbar-inverse">  	
-	<div class="container-fluid" style="clear: both; color: black;">				
-		<div class="navbar-header">									
-			<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" /></a>
-			<span class="navbar-brand" id="txt1">Painel PRODES - taxas</span>
-		</div>
-		<ul class="nav navbar-nav">
-			<li>
-				<a href="#" id="panel_swap" title="Alternar para o painel de consulta aos incrementos anuais de desmatamento.">
-				<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Painel incrementos</span>
-				</a>
-			</li>
-			<li>
-				<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
-				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-				<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
-				</a>
-			</li>
-			<li>
-				<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
-				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
-				<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escurecer/clarear</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">
-			<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil.">&nbsp;&nbsp;
-			<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English.">&nbsp;&nbsp;
-			<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español.">
-			</a></li>
-			<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
-		</ul>
-	</div>
-</nav>
+	<nav class="navbar navbar-inverse">  	
+		<div class="container-fluid" style="clear: both; color: black;">				
+			<div class="navbar-header">									
+				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" /></a>
+				<span class="navbar-brand" id="txt1">Painel PRODES - taxas</span>
+			</div>
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="prodes-increase.html" id="panel_swap" title="Alternar para o painel de consulta aos incrementos anuais de desmatamento.">
+					<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Painel incrementos</span>
+					</a>
+				</li>
+				<li>
+					<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
+					<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
+					<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
+					<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
+					<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escurecer/clarear</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">
+				<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil.">&nbsp;&nbsp;
+				<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English.">&nbsp;&nbsp;
+				<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español.">
+				</a></li>
+				<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
+			</ul>
 
-<div class="container">
+		</div>
+	</nav>
+	<div class="container">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
 				<span id="txt7">Taxas anuais de desmatamento na Amazônia Legal Brasileira (AMZ)</span>
@@ -176,70 +177,70 @@
 				</div>
 				<!-- modal window with information about download -->
 				<div class="modal fade" id="modal-container-download" role="dialog" aria-labelledby="download-rates" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							 
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								×
-							</button>
-							<h4 class="modal-title" id="download-rates">
-								<span id="txt25">Informações para download</span>
-							</h4>
-						</div>
-						<div class="modal-body">
-							<span id="txt26">Baixar a tabela com as taxas de desmatamento em formato CSV.</span>
-							<div class="dwn-tool">
-								<a href="#" id="download-csv-daily">
-								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span><strong>*</strong>
-								</a>
-								<br/>
-								<a href="#" id="download-csv-daily-all">
-								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span><strong>*</strong>
-								</a>
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="download-rates">
+									<span id="txt25">Informações para download</span>
+								</h4>
 							</div>
-						</div>
-						<div class="modal-footer">
-							 
-							<button type="button" class="btn btn-default" data-dismiss="modal">
-								<span id="txt29">Fechar</span>
-							</button> 
+							<div class="modal-body">
+								<span id="txt26">Baixar a tabela com as taxas de desmatamento em formato CSV.</span>
+								<div class="dwn-tool">
+									<a href="#" id="download-csv-daily">
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span><strong>*</strong>
+									</a>
+									<br/>
+									<a href="#" id="download-csv-daily-all">
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span><strong>*</strong>
+									</a>
+								</div>
+							</div>
+							<div class="modal-footer">
+								
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt29">Fechar</span>
+								</button> 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			</div>
 		</div>
-</div>
-<div id="footer_page"></div>
-<div id="print_information" style="display:none;" onclick="this.style.display='none';">
-	<span class="info_p"><span id="txt30">
-		A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
-		A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
-		&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
-		&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
-		&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
-		<span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
-		<span id="txt31">Concluir</span>
+	</div>
+	<div id="footer_page"></div>
+	<div id="print_information" style="display:none;" onclick="this.style.display='none';">
+		<span class="info_p"><span id="txt30">
+			A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+			A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+			&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+			&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+			&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
+			<span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
+			<span id="txt31">Concluir</span>
+			</span>
 		</span>
-	</span>
-</div>
+	</div>
 
-<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
-<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
-<script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="./libs/bootstrap/bootstrap-3.2.0.min.js"></script>
-<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
-<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
-<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
-<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
-<script type="text/javascript" src="./js/svg-to-image.js"></script>
-<!-- <script type="text/javascript" src="./js/prodesDataTable.min.js"></script> -->
-<!-- <script type="text/javascript" src="./js/dashboard-prodes-rates.min.js"></script> -->
-<script type="text/javascript" src="./js/prodesDataTable.js"></script>
-<script type="text/javascript" src="./js/dashboard-prodes-rates.js"></script>
-<script type="text/javascript" src="./js/dashboard-translation-prodes.js"></script>
-<script type="text/javascript" src="./js/dashboard-change-lang.js"></script>
+	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
+	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
+	<script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="./libs/bootstrap/bootstrap-3.2.0.min.js"></script>
+	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
+	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
+	<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
+	<script type="text/javascript" src="./js/svg-to-image.js"></script>
+	<!-- <script type="text/javascript" src="./js/prodesDataTable.min.js"></script> -->
+	<!-- <script type="text/javascript" src="./js/dashboard-prodes-rates.min.js"></script> -->
+	<script type="text/javascript" src="./js/prodesDataTable.js"></script>
+	<script type="text/javascript" src="./js/dashboard-prodes-rates.js"></script>
+	<script type="text/javascript" src="./js/dashboard-translation-rates.js"></script>
+	<script type="text/javascript" src="./js/dashboard-change-lang.js"></script>
 
 </body>
 </html>

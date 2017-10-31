@@ -1,0 +1,104 @@
+body{
+	background-image: url('../img/bkg_inpe_logo.png');
+	background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.container{
+	margin-right: 10px;
+	margin-left: 10px;
+	width: 99%;
+}
+.btn_tools{
+	position: absolute;
+	cursor: pointer;
+	top: inherit;
+}
+#btn_print{
+	right: 27px;
+}
+#btn_down{
+	right: 4px;
+}
+.dc-chart path.line {
+	stroke-width: 3px;
+}
+.dc-chart rect.bar {
+	fill-opacity: 0.8;
+}
+.reset, .dc-chart .pie-slice, .dc-chart g.row text{
+	fill: #000000;
+	font-size: smaller;
+}
+.navbar-inverse .navbar-nav li a {
+    color: #dedede;
+}
+.navbar-inverse .navbar-brand {
+    color: #f5f5f5;
+}
+#print_information{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: left;
+	background-color: rgba(52, 73, 99, 0.7);
+}
+.info_p{
+	width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-size: 20px;
+    background-color: #fffe94;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+}
+#print_page{
+	position: relative;
+	width: 100%;
+    text-align: end;
+	cursor: pointer;
+	color: #333;
+}
+.dc-chart{
+	width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.reset{
+	background-color: rgb(220, 241, 186);
+	border-radius: 8px;
+	border: rgb(187, 224, 123) solid 1px;
+	fill: black;
+	font-size: x-small;
+	text-align: left;
+}
+.keep-space{
+	height: 18px;
+}
+.info{
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+}
+.all-charts-title {
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#footer_page{
+	text-align: center;
+	color: gray;
+	width: 98%;
+	border-top: rgb(187, 224, 123) solid 1px;
+	left: 1%;
+	right: 1%;
+	bottom: 0px;
+}
+#footer_print{
+	display: none;
+}
