@@ -61,6 +61,14 @@ var utils = {
 		document.getElementById('stylesheet_dash').href='./css/dashboard-prodes-rates'+((utils.cssDefault)?(''):('-dark'))+'.css';
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
+	},
+	collapsePanel: function() {
+		var selectIds = $('#collapse1, #collapse2');
+		// occurs when the collapsible element is about to be shown or to be hidden
+		selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
+			// alternate between plus and minus
+			$(this).prev().find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus'); 
+		});
 	}
 };
 
@@ -474,7 +482,9 @@ var graph={
 		d3.select('#panel_swap')
 	    .on('click', function() {
 	    	window.location='?type=default';
-	    });
+		});
+
+		utils.collapsePanel();		
 		
 		this.jsLanguageChange();
 	},
@@ -512,8 +522,8 @@ window.onload=function(){
         // and stop event from bubbling
         return false;
     });
-
+	
 	Lang.init();
 	graph.init();
-	Lang.apply();// apply from previous selection
+	Lang.apply();// apply from previous selection			
 };
