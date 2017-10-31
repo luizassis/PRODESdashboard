@@ -58,9 +58,17 @@ var utils = {
 	},
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
-		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-prodes-rates-dark.css'));
+		document.getElementById('stylesheet_dash').href='./css/dashboard-prodes-rates'+((utils.cssDefault)?(''):('-dark'))+'.css';
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
+	},
+	collapsePanel: function() {
+		var selectIds = $('#collapse1, #collapse2');
+		// occurs when the collapsible element is about to be shown or to be hidden
+		selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
+			// alternate between plus and minus
+			$(this).prev().find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus'); 
+		});
 	}
 };
 
@@ -79,7 +87,7 @@ var graph={
 
 	yearRateGroup: null,
 	ufRateGroup: null,
-	stateYearRateGroup: null,
+	stateYearRateGroup: null, 
 
 	data:null,
 	data_all:null,
@@ -96,20 +104,19 @@ var graph={
 
 	loadConfigurations: function() {
 		
-		d3.json("config/config-rates.json", function(error, conf) {
+		d3.json("config/config.json", function(error, conf) {
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
-			}else {
-				if(conf) {
-					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
-					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
-					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
-					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
-					graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
-					graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
-				}
-				utils.applyConfigurations();
 			}
+			if(conf) {
+				graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+				graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+				graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+				graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+				graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
+				graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
+			}
+			utils.applyConfigurations();
 		});
 		
 	},
@@ -475,7 +482,9 @@ var graph={
 		d3.select('#panel_swap')
 	    .on('click', function() {
 	    	window.location='?type=default';
-	    });
+		});
+
+		utils.collapsePanel();		
 		
 		this.jsLanguageChange();
 	},
@@ -513,8 +522,8 @@ window.onload=function(){
         // and stop event from bubbling
         return false;
     });
-
+	
 	Lang.init();
 	graph.init();
-	Lang.apply();// apply from previous selection
+	Lang.apply();// apply from previous selection			
 };
