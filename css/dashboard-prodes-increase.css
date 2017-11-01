@@ -14,11 +14,11 @@ body{
 	cursor: pointer;
 	top: inherit;
 }
-#btn_print{
-	right: 27px;
-}
-#btn_down{
-	right: 4px;
+.btn-download{
+	cursor: pointer;
+    position: absolute;
+    top: -1px;
+	right: 10px;
 }
 .dc-chart path.line {
 	stroke-width: 3px;
@@ -75,8 +75,16 @@ body{
 	font-size: x-small;
 	text-align: left;
 }
+.glyphicon{
+	color: #368fb3;
+}
+.nav .glyphicon, button .glyphicon{
+	color: #ffffff;
+}
 .keep-space{
+	position: relative;
 	height: 18px;
+    margin-bottom: 3px;
 }
 .info{
 	text-align: center;

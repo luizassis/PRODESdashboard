@@ -13,7 +13,7 @@ body{
 	cursor: pointer;
     position: absolute;
     top: -1px;
-    right: 10px;
+	right: 10px;
 }
 #btn_print{
 	right: 27px;
@@ -97,8 +97,6 @@ body{
 .keep-space{
 	position: relative;
 	height: 18px;
-    /* border: 1px solid #e7e7e7;
-    border-radius: 8px; */
     margin-bottom: 3px;
 }
 #downloadTableBtn{

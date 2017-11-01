@@ -16,19 +16,18 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
-				<!--<a class="navbar-brand" href="#"><span id="txt1">Painel PRODES - taxas</span></a>-->
-				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" ></a>
+				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" /></a>
 				<span class="navbar-brand" id="txt1">PRODES Amazônia</span>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li>
 						<a href="prodes-rates.html" id="panel_swap" title="Ir para o painel de consulta a taxas anuais de desmatamento.">
-						<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Painel taxas</span>
+						<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Ir para o painel de taxas</span>
 						</a>
 					</li>
 					<li>
-						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incrementos de desmatamento.">
+						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incrementos de desmatamento em formato CSV.">
 						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
 						<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
 						</a>
@@ -39,7 +38,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
+						<a href="#" id="change_style" title="Alternar o estilo de apresentação escuro/claro.">
 						<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
 						</a>
 					</li>
@@ -58,7 +57,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
-				<span>Incremento anual de área desmatada na Amazônia Legal para os últimos 5 anos</span>
+				<span id="txt7">Incremento anual de área desmatada na Amazônia Legal para os últimos 5 anos</span>
 				<a id="infoRatesBtn" href="#modal-container-info-rates" role="button" class="btn btn-chart-info" data-toggle="modal">
 					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Clique para ver mais informações sobre os incrementos no desmatamento."></span>
 				</a>
@@ -67,9 +66,10 @@
 				<div id="chart-by-year">
 					<div id="title-chart-by-year" class="all-charts-title"></div>
 					<div class="keep-space">
-						<div class="reset" style="display:none;"><b>Filtro:</b> <span class="filter"></span>
-							<a href="javascript:graph.resetFilter('year');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
+						<div class="reset" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
+							<a href="javascript:graph.resetFilter('year');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt9" title="Limpar este filtro."></span></a>
 						</div>
+						<div class="btn-download"><span onclick="downloadAsImage('chart-by-year');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="dwn1" title="Baixar a imagem do gráfico em formato PNG."></span></div>
 					</div>
 				</div>
 			</div>
@@ -77,9 +77,10 @@
 				<div id="chart-by-state">
 					<div id="title-chart-by-state" class="all-charts-title"></div>
 					<div class="keep-space">
-						<div class="reset" style="display:none;"><b>Filtro:</b> <span class="filter"></span>
-							<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
+						<div class="reset" style="display:none;"><b><span id="txt10">Filtro:</span></b> <span class="filter"></span>
+							<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt11" title="Limpar este filtro."></span></a>
 						</div>
+						<div class="btn-download"><span onclick="downloadAsImage('chart-by-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="dwn2" title="Baixar a imagem do gráfico em formato PNG."></span></div>
 					</div>
 				</div>
 			</div>
@@ -89,17 +90,19 @@
 			<div class="col-md-6">
 				<div id="chart-by-mun">
 					<div id="title-chart-by-mun" class="all-charts-title"></div>
-					<div class="reset" style="visibility: hidden;"><b>Filtro:</b> <span class="filter"></span>
-						<a href="javascript:graph.resetFilter('mun');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
+					<div class="reset" style="visibility: hidden;"><b><span id="txt12">Filtro:</span></b> <span class="filter"></span>
+						<a href="javascript:graph.resetFilter('mun');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt13" title="Limpar este filtro."></span></a>
 					</div>
+					<div class="btn-download"><span onclick="downloadAsImage('chart-by-mun');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="dwn3" title="Baixar a imagem do gráfico em formato PNG."></span></div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div id="chart-by-uc">
 					<div id="title-chart-by-uc" class="all-charts-title"></div>
-					<div class="reset" style="visibility: hidden;"><b>Filtro:</b> <span class="filter"></span>
-						<a href="javascript:graph.resetFilter('uc');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
+					<div class="reset" style="visibility: hidden;"><b><span id="txt14">Filtro:</span></b> <span class="filter"></span>
+						<a href="javascript:graph.resetFilter('uc');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt15" title="Limpar este filtro."></span></a>
 					</div>
+					<div class="btn-download"><span onclick="downloadAsImage('chart-by-uc');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="dwn4" title="Baixar a imagem do gráfico em formato PNG."></span></div>
 				</div>
 			</div>
 		</div>
@@ -116,19 +119,19 @@
 									×
 								</button>
 								<h4 class="modal-title" id="info-rates">
-									<span id="txt19">Informações complementares</span>
+									<span id="txt16">Informações complementares</span>
 								</h4>
 							</div>
 							<div class="modal-body">
 								<div id="warning-msg" class="alert alert-warning">
 									<strong><span>* </span></strong><span id="warning-txt">O desmatamento apresentado para 2017 é parcial.</span>
 								</div>
-								<a target="_blank" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" id="txt23">Informações completas sobre o projeto PRODES</a>
+								<a target="_blank" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" id="txt17">Para mais informações acesse a página do projeto PRODES</a>
 							</div>
 							<div class="modal-footer">
 									
 								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt24">Fechar</span>
+									<span id="txt18">Fechar</span>
 								</button> 
 							</div>
 						</div>
@@ -144,25 +147,25 @@
 									×
 								</button>
 								<h4 class="modal-title" id="download-rates">
-									<span id="txt25">Informações para download</span>
+									<span id="txt19">Informações para download</span>
 								</h4>
 							</div>
 							<div class="modal-body">
-								<span id="txt26">Baixar a tabela com as taxas de desmatamento em formato CSV.</span>
+								<span id="txt20">Baixar a tabela com os incrementos de desmatamento, para os últimos 5 anos, em formato CSV.</span>
 								<div class="dwn-tool">
 									<a href="#" id="download-csv-daily">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span><strong>*</strong>
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt21">Incluindo os filtros aplicados.</span><strong>*</strong>
 									</a>
 									<br/>
 									<a href="#" id="download-csv-daily-all">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span><strong>*</strong>
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt22">Não incluindo os filtros aplicados.</span><strong>*</strong>
 									</a>
 								</div>
 							</div>
 							<div class="modal-footer">
 								
 								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt29">Fechar</span>
+									<span id="txt23">Fechar</span>
 								</button> 
 							</div>
 						</div>

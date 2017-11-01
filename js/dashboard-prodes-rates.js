@@ -389,7 +389,8 @@ var graph={
 				return +d.value;
 			})
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(fw - graph.lineRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
+			.legend(dc.legend().x(fw - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
+			//.legend(dc.legend().x(fw - graph.lineRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 
 		this.lineRateStatesByYear.xAxis().ticks(auxYears.length);
 		this.lineRateStatesByYear.xAxis().tickFormat(function(d) {
@@ -440,7 +441,8 @@ var graph={
 			})
 			.ordering(dc.pluck('key'))
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(1).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
+			.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((parseInt(fw/4)>=400)?(400):(200)).itemWidth(40));
+			//.legend(dc.legend().x(1).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
 
@@ -492,7 +494,8 @@ var graph={
 			.group(this.rateSumGroup, ufList[0], sel_stack(ufList[0]))
 			.renderLabel(true)
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(fw - graph.barRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
+			.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));//.itemWidth(40));
+			//.legend(dc.legend().x(fw - graph.barRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 
 		delete ufList[0];
 		ufList.forEach(function(uf){
