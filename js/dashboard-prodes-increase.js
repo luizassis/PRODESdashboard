@@ -252,7 +252,18 @@ var graph={
 				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²";
+				var filters = graph.pieTotalizedByState.filters();
+				var localized = false;
+				
+				for(var f = 0; f < filters.length; f++){
+					if(filters[f] === d.key) localized = true; 
+				}
+				
+				if(filters.length == 0){
+					return d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²";
+				} else {
+					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²" : "";
+				}
 			})
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.legend(dc.legend());
