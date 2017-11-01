@@ -54,7 +54,7 @@ body{
     font-size: 20px;
     background-color: #fffe94;
     border-radius: 5px;
-    border: solid 1px #ccc;
+	border: solid 1px #ccc;
 }
 #print_page{
 	position: relative;
@@ -73,7 +73,7 @@ body{
 .glyphicon{
 	color: #368fb3;
 }
-.nav .glyphicon{
+.nav .glyphicon, button .glyphicon{
 	color: #ffffff;
 }
 .info{

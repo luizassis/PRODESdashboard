@@ -342,6 +342,10 @@ var graph={
 					.attr('transform', 'translate(-15,7) rotate(315)');
 			});
 
+		this.barRateByYear.yAxis().tickFormat(function(d) {
+			return localeBR.numberFormat(',1f')(d);
+		});
+
 		/**
 		 * Starting the lines chart by States for rates per years.
 		 */
@@ -358,7 +362,7 @@ var graph={
 			.width(fw)
 			.height(fh)
 			.margins({top: 0, right: 10, bottom: 45, left: 45})
-			.chart(function(c) { return dc.lineChart(c).interpolate('default').renderDataPoints(true).evadeDomainFilter(true); })
+			.chart(function(c) { return dc.lineChart(c).interpolate('default').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
 			.x(xScale)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].lineYAxis)
@@ -391,6 +395,9 @@ var graph={
 		this.lineRateStatesByYear.xAxis().tickFormat(function(d) {
 			return d+"";
 		});
+		this.lineRateStatesByYear.yAxis().tickFormat(function(d) {
+			return localeBR.numberFormat(',1f')(d);
+		});
 		
 		this.lineRateStatesByYear
 			.on("renderlet.a",function (chart) {
@@ -398,33 +405,6 @@ var graph={
 				chart.selectAll('g.x text')
 					.attr('transform', 'translate(-15,7) rotate(315)');
 			});
-		
-		/*
-		
-		// Ordering lines by rates.
-		this.lineRateStatesByYear
-			.seriesSort(function(a,b) {
-				var rank=graph.ufRateGroup.top(Infinity);
-				var sr=[];
-				rank.forEach(function(d){
-					sr[d.key]=+d.value;
-				});
-				return d3.descending(sr[a], sr[b]);
-			})
-
-		// The method Accessor didn't work here.
-		this.lineRateStatesByYear
-			.colorAccessor(function(d) {
-				var i=0,l=barColors.length;
-				while(i<l){
-					if(barColors[i].key==d.key){
-						console.log("lineRateStatesByYear=>"+d.key+":"+barColors[i].color);
-						return barColors[i].color;
-					}
-					i++;
-				}
-			});
-		*/
 		
 		/**
 		 * Starting the pie chart of the States by rates.
@@ -477,7 +457,6 @@ var graph={
 		ufs.forEach(function(d){
 			ufList.push(d.key);
 		});
-		//ufList.reverse();
 		
 		this.barRateStatesByYear
 			.width(fw)
@@ -497,21 +476,17 @@ var graph={
 				var t="";
 				for(obj in d.value){
 					if(d.value[obj]>0) {
-						t += obj+":"+d.value[obj]+"\n";
+						t += Translation[Lang.language].state + obj +
+						" ("+Translation[Lang.language].area + localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " km²)\n";
 					}
 				}
-				
-				return "Ano: " + d.key + "\n" + t;
-
-				// return Translation[Lang.language].state + d.key[0] + "\n" +
-				// Translation[Lang.language].year + d.key[1] + "\n" +
-				// Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
+				return Translation[Lang.language].year + d.key + "\n" + t;
 			})
-			// .label(function(d) {
-			// 	var t=parseFloat((d.y0/1000).toFixed(1));
-			// 	t=(t<1?localeBR.numberFormat(',1f')(parseFloat((d.y0).toFixed(1))):localeBR.numberFormat(',1f')(t)+"k");
-			// 	return t;
-			// })
+			.label(function(d) {
+				var t=parseFloat(((d.y+d.y0)/1000).toFixed(1));
+				t=(t<1?localeBR.numberFormat(',1f')(parseFloat((d.y+d.y0).toFixed(1))):localeBR.numberFormat(',1f')(t)+"k");
+				return t;
+			})
 			.elasticY(true)
 			.dimension(this.yearDimension)
 			.group(this.rateSumGroup, ufList[0], sel_stack(ufList[0]))
@@ -527,6 +502,9 @@ var graph={
 		this.barRateStatesByYear.xAxis().ticks(auxYears.length);
 		this.barRateStatesByYear.xAxis().tickFormat(function(d) {
 			return d+"";
+		});
+		this.barRateStatesByYear.yAxis().tickFormat(function(d) {
+			return localeBR.numberFormat(',1f')(d);
 		});
 		
 		this.barRateStatesByYear
@@ -560,6 +538,8 @@ var graph={
 			graph.barRateByYear.filterAll();
 		}else if(who=='state'){
 			graph.pieTotalizedByState.filterAll();
+		}else if(who=='stackbar-state'){
+			graph.barRateStatesByYear.filterAll();
 		}
 		dc.redrawAll();
 	},
