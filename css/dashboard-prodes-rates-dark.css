@@ -2,7 +2,10 @@ body{
     background-color: #396858 !important;
     color: white !important;
 }
-.dc-chart .pie-slice, .dc-chart g.row text, svg text{
+text.pie-slice{
+	fill: black !important;
+}
+.dc-chart, .dc-chart g.row text, svg text{
 	fill: white !important;
 }
 .reset{

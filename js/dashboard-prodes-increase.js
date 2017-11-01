@@ -23,6 +23,14 @@ var utils = {
 		elementId='title-chart-by-'+elementId;
 		document.getElementById(elementId).innerHTML=title;
 	},
+	totalRateCalculator: function() {
+		var itens=graph.ufAreaMunGroup.top(Infinity);
+		var t=0;
+		itens.forEach(function(d){
+			t+=d.value;
+		});
+		return t;
+	},
 	/*
 	 * Remove numeric values less than 1e-6
 	 */
@@ -248,8 +256,10 @@ var graph={
 			.dimension(this.ufDimension)
 			.group(this.ufAreaMunGroup)
 			.title(function(d) {
-				return "Estado: " + d.key + "\n" +
-				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+				var t=utils.totalRateCalculator();
+				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				t = Translation[Lang.language].state + d.key + "\n" + t + "\n";
+				return t + Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})
 			.label(function(d) {
 				var filters = graph.pieTotalizedByState.filters();
@@ -259,12 +269,15 @@ var graph={
 					if(filters[f] === d.key) localized = true; 
 				}
 				
+				var t=utils.totalRateCalculator();
+
 				if(filters.length == 0){
-					return d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²";
+					return d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
 				} else {
-					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²" : "";
+					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %" : "";
 				}
 			})
+			.ordering(dc.pluck('key'))
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.legend(dc.legend());
 
