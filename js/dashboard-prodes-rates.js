@@ -67,7 +67,7 @@ var utils = {
 		// occurs when the collapsible element is about to be shown or to be hidden
 		selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
 			// alternate between plus and minus
-			$(this).prev().find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus'); 
+			$(this).prev('.panel-heading').find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus'); 
 		});
 	}
 };
@@ -549,6 +549,8 @@ var graph={
 			// TODO: handle exception
 			
 		}
+		utils.collapsePanel();
+
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.
@@ -615,8 +617,6 @@ var graph={
 	    	window.location='?type=default';
 		});
 
-		utils.collapsePanel();		
-		
 		this.jsLanguageChange();
 	},
 	preparePrint: function() {
