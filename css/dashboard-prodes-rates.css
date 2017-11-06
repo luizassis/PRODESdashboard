@@ -31,6 +31,9 @@ body{
 	fill: black;
 	font-size: smaller;
 }
+div .dc-chart {
+    float: none;
+}
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
 }

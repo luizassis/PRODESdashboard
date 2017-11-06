@@ -17,7 +17,7 @@ var utils = {
 	},
 	rebuildAll: function() {
 		utils.updateDimensions();
-		graph.build();
+		graph.updateChartsDimensions();
 	},
 	setTitle:function(elementId, title) {
 		elementId='title-chart-by-'+elementId;
@@ -143,6 +143,39 @@ var graph={
 		this.winWidth=dim.w;
 		this.winHeight=dim.h;
 	},
+	updateChartsDimensions: function() {
+		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
+		h=parseInt(this.winHeight * 0.3),
+		minWidth=250, maxWidth=600, fw=parseInt((w)/2),
+		fh=parseInt((this.winHeight - h) * 0.5);
+		// define min width to filter graphs
+		fw=((fw<minWidth)?(minWidth):(fw));
+		// define max width to filter graphs
+		fw=((fw>maxWidth)?(maxWidth):(fw));
+
+		// to single column in main container
+		var chartByYear=document.getElementById('chart-by-year')
+		if((chartByYear.clientWidth*2) > window.document.body.clientWidth) {
+			fw = chartByYear.clientWidth;
+		}
+
+		this.barAreaByYear
+			.width(fw)
+			.height(fh);
+		this.barAreaByYear.margins().left = 60;
+
+		this.pieTotalizedByState
+			.width(fw)
+			.height(fh);
+		this.rowTop10ByMun
+			.width(fw)
+			.height(fh);
+		this.rowTop10ByUc
+			.width(fw)
+			.height(fh);
+		
+		dc.renderAll();
+	},
 	setChartReferencies: function() {
 		
 		this.barAreaByYear = dc.barChart("#chart-by-year");
@@ -209,29 +242,12 @@ var graph={
 		
 	},
 	build: function() {
-		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
-		h=parseInt(this.winHeight * 0.3);
-		
+
 		this.setChartReferencies();
-		
-		var minWidth=250, maxWidth=600, fw=parseInt((w)/2),
-		fh=parseInt((this.winHeight - h) * 0.5);
-		// define min width to filter graphs
-		fw=((fw<minWidth)?(minWidth):(fw));
-		// define max width to filter graphs
-		fw=((fw>maxWidth)?(maxWidth):(fw));
-		
-		// to single column in main container
-		var chartByYear=document.getElementById('chart-by-year')
-		if((chartByYear.clientWidth*2) > window.document.body.clientWidth) {
-			fw = chartByYear.clientWidth;
-		}
 
 		utils.setTitle('year',Translation[Lang.language].barTitle);
 		
 		this.barAreaByYear
-			.height(fh)
-			.width(fw)
 			.yAxisLabel(Translation[Lang.language].barYAxis)
 			.xAxisLabel(Translation[Lang.language].barXAxis)
 			.dimension(this.yearDimension)
@@ -250,14 +266,10 @@ var graph={
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
 			.ordinalColors([(utils.cssDefault)?(graph.histogramColor):(graph.darkHistogramColor)]);
-
-		this.barAreaByYear.margins().left += 30;
 	
 		utils.setTitle('state',Translation[Lang.language].pieTitle);
 		
 		this.pieTotalizedByState
-			.height(fh)
-			.width(fw)
 			.innerRadius(10)
 			.externalRadiusPadding(30)
 			.dimension(this.ufDimension)
@@ -300,8 +312,6 @@ var graph={
 		};
 		
 		this.rowTop10ByMun
-			.height(fh)
-			.width(fw)
 			.dimension(this.munDimension)
 			.group(utils.snapToZero(this.munAreaMunGroup))
 			.title(function(d) {
@@ -333,8 +343,6 @@ var graph={
 		utils.setTitle('uc',Translation[Lang.language].rowUcTitle);
 
 		this.rowTop10ByUc
-			.height(fh)
-			.width(fw)
 			.dimension(this.ucDimension)
 			.group(utils.snapToZero(this.ucAreaUcGroup))
 			.title(function(d) {
@@ -363,7 +371,7 @@ var graph={
 			return d;
 		}).ticks(5);
 		
-		dc.renderAll();
+		this.updateChartsDimensions();
 		utils.addGenerationDate();
 		this.prepareTools();
 	},

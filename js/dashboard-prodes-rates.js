@@ -31,7 +31,7 @@ var utils = {
 	},
 	rebuildAll: function() {
 		utils.updateDimensions();
-		graph.build();
+		graph.updateChartsDimensions();
 	},
 	addGenerationDate: function() {
 		var footer_page=document.getElementById("footer_page");
@@ -97,6 +97,7 @@ var graph={
 
 	data:null,
 	data_all:null,
+	//filters: {},
 
 	winWidth: window.innerWidth,
 	winHeight: window.innerHeight,
@@ -131,6 +132,17 @@ var graph={
 		});
 		
 	},
+	// storeFilters: function() {
+	// 	if(this.barRateByYear.hasFilter()){
+	// 		this.filters['barRateByYear']=this.barRateByYear.filters();
+	// 	}
+	// 	if(this.pieTotalizedByState.hasFilter()){
+	// 		this.filters['pieTotalizedByState']=this.pieTotalizedByState.filters();
+	// 	}
+	// 	if(this.barRateStatesByYear.hasFilter()){
+	// 		this.filters['barRateStatesByYear']=this.barRateStatesByYear.filters();
+	// 	}
+	// },
 	getStates: function() {
 		var ufs=graph.ufDimension.group().all(),
 		ufList=[];
@@ -152,6 +164,43 @@ var graph={
 	setDimensions: function(dim) {
 		this.winWidth=dim.w;
 		this.winHeight=dim.h;
+	},
+	updateChartsDimensions: function() {
+		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
+		h=parseInt(this.winHeight * 0.3),
+		fw=parseInt(w),
+		fh=parseInt((this.winHeight - h) * 0.6),
+		fw34 = parseInt( (fw/4) * 3),
+		fw14 = parseInt(fw/4);
+
+		// to single column in main container
+		var chartByState=document.getElementById('chart-by-state')
+		if((chartByState.clientWidth*4) > window.document.body.clientWidth) {
+			fw = chartByState.clientWidth;
+			fw34 = fw;
+			fw14 = fw;
+		}
+
+		this.barRateByYear
+			.width(fw34)
+			.height(fh)
+			.margins({top: 0, right: 10, bottom: 50, left: 65});
+		this.lineRateStatesByYear
+			.width(fw)
+			.height(fh)
+			.margins({top: 0, right: 10, bottom: 50, left: 65})
+			.legend(dc.legend().x(fw - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
+		this.pieTotalizedByState
+			.width(fw14)
+			.height(fh)
+			.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((fw14>=400)?(400):(200)).itemWidth(40));
+		this.barRateStatesByYear
+			.width(fw)
+			.height(fh)
+			.margins({top: 0, right: 10, bottom: 50, left: 65})
+			.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));
+		
+		dc.renderAll();
 	},
 	setChartReferencies: function() {
 
@@ -198,6 +247,7 @@ var graph={
 		data = o;
 		graph.data_all = t;
 		graph.registerDataOnCrossfilter(data);
+		graph.setChartReferencies();
 		graph.build();
 	},
 	registerDataOnCrossfilter: function(data) {
@@ -311,7 +361,7 @@ var graph={
 		h=parseInt(this.winHeight * 0.3),
 		barColors = this.getOrdinalColorsToStates();
 
-		this.setChartReferencies();
+		//this.setChartReferencies();
 		utils.setDinamicTexts();
 
 		var fw=parseInt(w),
@@ -320,9 +370,9 @@ var graph={
 		var years=graph.yearDimension.group().all();
 
 		this.barRateByYear
-			.height(fh)
-			.width(parseInt( (fw/4) * 3))
-			.margins({top: 0, right: 10, bottom: 45, left: 45})
+			//.height(fh)
+			//.width(parseInt( (fw/4) * 3))
+			//.margins({top: 0, right: 10, bottom: 45, left: 45})
 			.yAxisLabel(Translation[Lang.language].barYAxis)
 			.xAxisLabel(Translation[Lang.language].barXAxis + years[0].key + " - " + years[years.length-1].key)
 			.dimension(this.yearDimension)
@@ -369,9 +419,9 @@ var graph={
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
 		this.lineRateStatesByYear
-			.width(fw)
-			.height(fh)
-			.margins({top: 0, right: 10, bottom: 45, left: 45})
+			//.width(fw)
+			//.height(fh)
+			//.margins({top: 0, right: 10, bottom: 45, left: 45})
 			.chart(function(c) { return dc.lineChart(c).interpolate('default').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
 			.x(xScale)
 			.brushOn(false)
@@ -398,8 +448,8 @@ var graph={
 			.valueAccessor(function(d) {
 				return +d.value;
 			})
-			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(fw - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
+			//.legend(dc.legend().x(fw - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
 			//.legend(dc.legend().x(fw - graph.lineRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 
 		this.lineRateStatesByYear.xAxis().ticks(auxYears.length);
@@ -421,8 +471,8 @@ var graph={
 		 * Starting the pie chart of the States by rates.
 		 */
 		this.pieTotalizedByState
-			.height(fh)
-			.width(parseInt(fw/4))
+			//.height(fh)
+			//.width(parseInt(fw/4))
 			.innerRadius(10)
 			.externalRadiusPadding(30)
 			.dimension(this.ufDimension)
@@ -450,8 +500,8 @@ var graph={
 				}
 			})
 			.ordering(dc.pluck('key'))
-			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((parseInt(fw/4)>=400)?(400):(200)).itemWidth(40));
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
+			//.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((parseInt(fw/4)>=400)?(400):(200)).itemWidth(40));
 			//.legend(dc.legend().x(1).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
@@ -471,9 +521,9 @@ var graph={
 		});
 		
 		this.barRateStatesByYear
-			.width(fw)
-			.height(fh)
-			.margins({top: 0, right: 10, bottom: 45, left: 45})
+			//.width(fw)
+			//.height(fh)
+			//.margins({top: 0, right: 10, bottom: 45, left: 45})
 			.x(d3.scale.ordinal())
 	        .xUnits(dc.units.ordinal)
 			.brushOn(false)
@@ -503,8 +553,8 @@ var graph={
 			.dimension(this.yearDimension)
 			.group(this.rateSumGroup, ufList[0], sel_stack(ufList[0]))
 			.renderLabel(true)
-			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
-			.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));//.itemWidth(40));
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
+			//.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));//.itemWidth(40));
 			//.legend(dc.legend().x(fw - graph.barRateStatesByYear.margins().right - 40).y(5).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(40));
 
 		delete ufList[0];
@@ -527,7 +577,7 @@ var graph={
 					.attr('transform', 'translate(-15,7) rotate(315)');
 			});
 
-		dc.renderAll();
+		this.updateChartsDimensions();
 		this.buildDataTable();
 		this.prepareTools();
 	},
@@ -549,10 +599,13 @@ var graph={
 	resetFilter: function(who) {
 		if(who=='year'){
 			graph.barRateByYear.filterAll();
+			//this.filters['barRateByYear']=null;
 		}else if(who=='state'){
 			graph.pieTotalizedByState.filterAll();
+			//this.filters['pieTotalizedByState']=null;
 		}else if(who=='stackbar-state'){
 			graph.barRateStatesByYear.filterAll();
+			//this.filters['barRateStatesByYear']=null;
 		}
 		dc.redrawAll();
 	},
