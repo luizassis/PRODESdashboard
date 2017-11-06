@@ -13,7 +13,7 @@ body{
 	cursor: pointer;
     position: absolute;
     top: -1px;
-    right: 10px;
+	right: 10px;
 }
 #btn_print{
 	right: 27px;
@@ -54,7 +54,7 @@ body{
     font-size: 20px;
     background-color: #fffe94;
     border-radius: 5px;
-    border: solid 1px #ccc;
+	border: solid 1px #ccc;
 }
 #print_page{
 	position: relative;
@@ -73,7 +73,7 @@ body{
 .glyphicon{
 	color: #368fb3;
 }
-.nav .glyphicon{
+.nav .glyphicon, button .glyphicon{
 	color: #ffffff;
 }
 .info{
@@ -97,8 +97,6 @@ body{
 .keep-space{
 	position: relative;
 	height: 18px;
-    /* border: 1px solid #e7e7e7;
-    border-radius: 8px; */
     margin-bottom: 3px;
 }
 #downloadTableBtn{

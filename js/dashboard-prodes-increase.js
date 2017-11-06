@@ -23,6 +23,14 @@ var utils = {
 		elementId='title-chart-by-'+elementId;
 		document.getElementById(elementId).innerHTML=title;
 	},
+	totalRateCalculator: function() {
+		var itens=graph.ufAreaMunGroup.top(Infinity);
+		var t=0;
+		itens.forEach(function(d){
+			t+=d.value;
+		});
+		return t;
+	},
 	/*
 	 * Remove numeric values less than 1e-6
 	 */
@@ -212,17 +220,17 @@ var graph={
 			fw = chartByYear.clientWidth;
 		}
 
-		utils.setTitle('year','Desmatamento Anual');
+		utils.setTitle('year',Translation[Lang.language].barTitle);
 		
 		this.barAreaByYear
 			.height(fh)
 			.width(fw)
-			.yAxisLabel("Incremento no desmatamento (km²)")
-			.xAxisLabel("Ano de apuração do desmatamento")
+			.yAxisLabel(Translation[Lang.language].barYAxis)
+			.xAxisLabel(Translation[Lang.language].barXAxis)
 			.dimension(this.yearDimension)
 			.group(utils.snapToZero(this.yearAreaMunGroup))
 			.title(function(d) {
-				return "Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+				return Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
 				return localeBR.numberFormat(',1f')(Math.round(d.data.value)) + " km²";
@@ -238,7 +246,7 @@ var graph={
 
 		this.barAreaByYear.margins().left += 30;
 	
-		utils.setTitle('state','Desmatamento Total por Estado');
+		utils.setTitle('state',Translation[Lang.language].pieTitle);
 		
 		this.pieTotalizedByState
 			.height(fh)
@@ -248,17 +256,33 @@ var graph={
 			.dimension(this.ufDimension)
 			.group(this.ufAreaMunGroup)
 			.title(function(d) {
-				return "Estado: " + d.key + "\n" +
-				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+				var t=utils.totalRateCalculator();
+				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				t = Translation[Lang.language].state + d.key + "\n" + t + "\n";
+				return t + Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})
 			.label(function(d) {
-				return d.key + ":" + localeBR.numberFormat(',1f')(Math.round(d.value)) + " km²";
+				var filters = graph.pieTotalizedByState.filters();
+				var localized = false;
+				
+				for(var f = 0; f < filters.length; f++){
+					if(filters[f] === d.key) localized = true; 
+				}
+				
+				var t=utils.totalRateCalculator();
+
+				if(filters.length == 0){
+					return d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
+				} else {
+					return localized === true ? d.key + ":" + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %" : "";
+				}
 			})
+			.ordering(dc.pluck('key'))
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
 			.legend(dc.legend());
 
 		
-		utils.setTitle('mun','Os 10 municípios com os piores índices de desmatamento');
+		utils.setTitle('mun',Translation[Lang.language].rowMunTitle);
 
 		var barHeightAdjust=function (chart) {
 			if(chart.data().length > 5){
@@ -274,8 +298,8 @@ var graph={
 			.dimension(this.munDimension)
 			.group(utils.snapToZero(this.munAreaMunGroup))
 			.title(function(d) {
-				return "Município/Estado: " + d.key + "\n" +
-				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+				return Translation[Lang.language].county + "/" + Translation[Lang.language].state + d.key + "\n" +
+				Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
 				return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";;
@@ -299,7 +323,7 @@ var graph={
 
 		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
 		
-		utils.setTitle('uc','As 10 Áreas de Proteção com os piores índices de desmatamento');
+		utils.setTitle('uc',Translation[Lang.language].rowUcTitle);
 
 		this.rowTop10ByUc
 			.height(fh)
@@ -307,8 +331,8 @@ var graph={
 			.dimension(this.ucDimension)
 			.group(utils.snapToZero(this.ucAreaUcGroup))
 			.title(function(d) {
-				return "Área de Proteção/Estado: " + d.key + "\n" +
-				"Área: " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+				return Translation[Lang.language].protectedArea + "/" + Translation[Lang.language].state + d.key + "\n" +
+				Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
 				return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
@@ -329,9 +353,6 @@ var graph={
 		this.rowTop10ByUc.on("preRedraw", barHeightAdjust);
 
 		this.rowTop10ByUc.xAxis().tickFormat(function(d) {
-			/*var t=d/1000;
-			t=(t<1?d:t+"k");
-			return t;*/
 			return d;
 		}).ticks(5);
 		
