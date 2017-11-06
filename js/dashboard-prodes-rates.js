@@ -65,9 +65,11 @@ var utils = {
 	collapsePanel: function() {
 		var selectIds = $('#collapse1, #collapse2');
 		// occurs when the collapsible element is about to be shown or to be hidden
-		selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
-			// alternate between plus and minus
-			$(this).prev('.panel-heading').find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus'); 
+		$(function() { // the page is in a state where it's ready to be manipulated ($(document).ready)
+			selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
+				// alternate between plus and minus
+				$(this).prev('.panel-heading').find('.glyphicon').toggleClass('glyphicon-chevron-right glyphicon-chevron-down'); 
+			});
 		});
 	}
 };
