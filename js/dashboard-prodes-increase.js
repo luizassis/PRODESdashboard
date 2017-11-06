@@ -78,6 +78,9 @@ var utils = {
 		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-prodes-increase-dark.css'));
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
+	},
+	displayLoadError: function(error) {
+		console.log("Implement the error display! Error: ("+error+")");
 	}
 };
 
@@ -111,7 +114,10 @@ var graph={
 	displayInfo: false,
 	displaySwapPanelButton: false,
 	
-	loadConfigurations: function() {
+	/**
+	 * Load configuration file before loading data.
+	 */
+	loadConfigurations: function(callback) {
 		
 		d3.json("config/config-increase.json", function(error, conf) {
 			if (error) {
@@ -129,6 +135,7 @@ var graph={
 				}
 				utils.applyConfigurations();
 			}
+			callback();
 		});
 		
 	},
@@ -362,13 +369,14 @@ var graph={
 	},
 	init: function() {
 		window.onresize=utils.onResize;
-		this.loadConfigurations();
-		try{
-			this.loadData();
-		}catch (e) {
-			// TODO: handle exception
-			
-		}
+		this.loadConfigurations(function(){
+			try{
+				graph.loadData();
+			}catch (e) {
+				// TODO: handle exception
+				utils.displayLoadError(e);
+			}
+		});
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.

@@ -71,6 +71,9 @@ var utils = {
 				$(this).prev('.panel-heading').find('.glyphicon').toggleClass('glyphicon-chevron-right glyphicon-chevron-down'); 
 			});
 		});
+	},
+	displayLoadError: function(error) {
+		console.log("Implement the error display! Error: ("+error+")");
 	}
 };
 
@@ -105,21 +108,26 @@ var graph={
 	displayInfo: false,
 	displaySwapPanelButton: false,
 
-	loadConfigurations: function() {
+	/**
+	 * Load configuration file before loading data.
+	 */
+	loadConfigurations: function(callback) {
 		
 		d3.json("config/config-rates.json", function(error, conf) {
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
+			}else{
+				if(conf) {
+					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+					graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
+					graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
+				}
+				utils.applyConfigurations();
 			}
-			if(conf) {
-				graph.pallet=conf.pallet?conf.pallet:graph.pallet;
-				graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
-				graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
-				graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
-				graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
-				graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
-			}
-			utils.applyConfigurations();
+			callback();
 		});
 		
 	},
@@ -525,15 +533,15 @@ var graph={
 	},
 	init: function() {
 		window.onresize=utils.onResize;
-		this.loadConfigurations();
-		try{
-			this.loadData();
-		}catch (e) {
-			// TODO: handle exception
-			
-		}
-		utils.collapsePanel();
-
+		this.loadConfigurations(function(){
+			try{
+				graph.loadData();
+			}catch (e) {
+				// TODO: handle exception
+				utils.displayLoadError(e);
+			}
+			utils.collapsePanel();
+		});
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.
