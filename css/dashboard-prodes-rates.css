@@ -34,6 +34,9 @@ body{
 div .dc-chart {
     float: none;
 }
+.y-axis-label, .x-axis-label{
+	font-size: small;
+}
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
 }
@@ -75,6 +78,7 @@ div .dc-chart {
 }
 .glyphicon{
 	color: #368fb3;
+	display: none;
 }
 .nav .glyphicon, button .glyphicon{
 	color: #ffffff;

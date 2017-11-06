@@ -97,7 +97,6 @@ var graph={
 
 	data:null,
 	data_all:null,
-	//filters: {},
 
 	winWidth: window.innerWidth,
 	winHeight: window.innerHeight,
@@ -132,17 +131,6 @@ var graph={
 		});
 		
 	},
-	// storeFilters: function() {
-	// 	if(this.barRateByYear.hasFilter()){
-	// 		this.filters['barRateByYear']=this.barRateByYear.filters();
-	// 	}
-	// 	if(this.pieTotalizedByState.hasFilter()){
-	// 		this.filters['pieTotalizedByState']=this.pieTotalizedByState.filters();
-	// 	}
-	// 	if(this.barRateStatesByYear.hasFilter()){
-	// 		this.filters['barRateStatesByYear']=this.barRateStatesByYear.filters();
-	// 	}
-	// },
 	getStates: function() {
 		var ufs=graph.ufDimension.group().all(),
 		ufList=[];
@@ -692,14 +680,34 @@ var graph={
 	}
 };
 
-window.onload=function(){
+window.init=function(){
 	Mousetrap.bind(['command+p', 'ctrl+p'], function() {
         console.log('command p or control p');
         // return false to prevent default browser behavior
         // and stop event from bubbling
         return false;
     });
-	
+	$(function() {
+		$('#chart1').hover(function() {
+			$('#txt10').fadeIn();
+		}, function() {
+			$('#txt10').fadeOut();
+		});
+		$('#chart2').hover(function() {
+			$('#txt13').fadeIn();
+		}, function() {
+			$('#txt13').fadeOut();
+		});
+		$('#chart3').hover(function() {
+			$('#txt14').fadeIn();
+		}, function() {
+			$('#txt14').fadeOut();
+		});
+	});
+};
+
+window.onload=function(){
+	window.init();
 	Lang.init();
 	graph.init();
 	Lang.apply();// apply from previous selection			

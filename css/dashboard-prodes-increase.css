@@ -30,6 +30,9 @@ body{
 	fill: #000000;
 	font-size: smaller;
 }
+.y-axis-label, .x-axis-label{
+	font-size: small;
+}
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
 }
@@ -77,9 +80,11 @@ body{
 }
 .glyphicon{
 	color: #368fb3;
+	display: none;
 }
 .nav .glyphicon, button .glyphicon{
 	color: #ffffff;
+	display: unset;
 }
 .keep-space{
 	position: relative;
@@ -99,6 +104,7 @@ body{
 	text-decoration: underline;
 }
 #footer_page{
+	display: none;
 	text-align: center;
 	color: gray;
 	width: 98%;

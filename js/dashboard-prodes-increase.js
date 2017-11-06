@@ -57,7 +57,7 @@ var utils = {
 			return;
 		}
 		var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
-		//footer_page.style.top=h+"px";
+		footer_page.style.display='block';
 		footer_print.style.width=window.innerWidth+"px";
 		var now=new Date();
 		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
@@ -70,7 +70,6 @@ var utils = {
 	 * - Enable or disable the panel swap button.
 	 */
 	applyConfigurations: function() {
-		//document.getElementById("warning-msg").style.display=( (graph.displayInfo)?(''):('none') );
 		document.getElementById("panel_swap").style.display=( (graph.displaySwapPanelButton)?(''):('none') );
 	},
 	changeCss: function(bt) {
@@ -484,14 +483,39 @@ var graph={
 	}
 };
 
-window.onload=function(){
+window.init=function(){
 	Mousetrap.bind(['command+p', 'ctrl+p'], function() {
         console.log('command p or control p');
         // return false to prevent default browser behavior
         // and stop event from bubbling
         return false;
     });
+	$(function() {
+		$('#chart1').hover(function() {
+			$('#dwn1').fadeIn();
+		}, function() {
+			$('#dwn1').fadeOut();
+		});
+		$('#chart2').hover(function() {
+			$('#dwn2').fadeIn();
+		}, function() {
+			$('#dwn2').fadeOut();
+		});
+		$('#chart3').hover(function() {
+			$('#dwn3').fadeIn();
+		}, function() {
+			$('#dwn3').fadeOut();
+		});
+		$('#chart4').hover(function() {
+			$('#dwn4').fadeIn();
+		}, function() {
+			$('#dwn4').fadeOut();
+		});
+	});
+};
 
+window.onload=function(){
+	window.init();
 	Lang.init();
 	graph.init();
 	Lang.apply();// apply from previous selection
