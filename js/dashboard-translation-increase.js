@@ -2,7 +2,7 @@ var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
 		'txt1':'PRODES Amazônia',
-		'txt2':'Ir para o painel de taxas',
+		'txt2':'Incrementos de desmatamento',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
 		'txt5':'Escuro/Claro',

@@ -37,10 +37,17 @@ div .dc-chart {
 .y-axis-label, .x-axis-label{
 	font-size: small;
 }
+.nav li.active #txt1{
+	color: black;
+	background-color: white;
+}
+.navbar-nav {
+	font-size: large;
+}
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
 }
-.navbar-inverse .navbar-brand {
+.navbar-brand {
     color: #f5f5f5;
 }
 #print_information{
