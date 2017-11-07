@@ -28,7 +28,7 @@
 				<li>
 					<a href="prodes-increase.html" id="panel_swap" title="Ir para o painel de consulta aos incrementos anuais de desmatamento.">
 						<!--<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;-->
-						Incrementos de desmatamento
+						<span id="txt2">Incrementos de desmatamento</span>
 					</a>					
 				</li>
 				<li>
@@ -125,7 +125,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-								<i class="glyphicon glyphicon-chevron-right" style="color:black"></i>
+								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
 								<span id="txt16">Taxa anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
 							</a>
 							<span style="clear: both;color: black;position: relative;float: right;">
@@ -145,7 +145,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-								<i class="glyphicon glyphicon-chevron-right" style="color:black"></i> 
+								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
 								<span id="txt18">Variações relativas das taxas anuais de desmatamento (%)</span>
 							</a>
 						</h4>
@@ -215,11 +215,11 @@
 							<div class="modal-body">
 								<span id="txt26">Baixar a tabela com as taxas de desmatamento em formato CSV.</span>
 								<div class="dwn-tool">
-									<a href="#" id="download-csv-daily">
+									<a href="#" id="download-csv-filtered">
 									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span><strong>*</strong>
 									</a>
 									<br/>
-									<a href="#" id="download-csv-daily-all">
+									<a href="#" id="download-csv-all">
 									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span><strong>*</strong>
 									</a>
 								</div>

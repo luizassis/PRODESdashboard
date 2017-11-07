@@ -598,42 +598,104 @@ var graph={
 		dc.redrawAll();
 	},
 	prepareTools: function() {
+		var downloadCSVWithFilter=function() {
+
+			if(graph.barRateByYear.hasFilter() || graph.pieTotalizedByState.hasFilter() || graph.lineRateStatesByYear.hasFilter()) {
+
+				var ufs=[],years=[],rates=[];
+				
+				graph.data2csv.forEach(function(d) {
+					if(d.uf!='AMZ') {
+						if(ufs.indexOf(d.uf)<0){
+							ufs.push(d.uf);
+							rates[d.uf]=[]
+						}
+						if(years.indexOf(d.year)<0){
+							years.push(d.year);
+						}
+						rates[d.uf][d.year]=d.originalRate;
+					}
+				});
+				var csv=[],aux={};
+				ufs.forEach(function(u) {
+					years.forEach(function(y) {
+						if(aux[y]) {
+							c=aux[y];
+						}else{
+							var c={};
+							c['year']=y;
+							aux[y]=c;
+						}
+						c[u]=rates[u][y];
+					});
+				});
+				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
+
+				var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+				var dt=new Date();
+				dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+				saveAs(blob, 'prodes_rates_filtered_'+dt+'.csv');
+			}else{
+				downloadCSVWithoutFilter();
+			}
+		};
+
+		var downloadCSVWithoutFilter=function() {
+
+			var ufs=[],years=[],rates=[];
+			
+			graph.data.forEach(function(d) {
+				if(ufs.indexOf(d.uf)<0){
+					ufs.push(d.uf);
+					rates[d.uf]=[]
+				}
+				if(years.indexOf(d.year)<0){
+					years.push(d.year);
+				}
+				
+				rates[d.uf][d.year]=d.rate;
+			});
+			graph.data_all.forEach(function(d) {
+				if(ufs.indexOf(d.uf)<0){
+					ufs.push(d.uf);
+					rates[d.uf]=[]
+				}
+				if(years.indexOf(d.year)<0){
+					years.push(d.year);
+				}
+				
+				rates[d.uf][d.year]=d.rate;
+			});
+			var csv=[],aux={};
+			ufs.forEach(function(u) {
+				years.forEach(function(y) {
+					if(aux[y]) {
+						c=aux[y];
+					}else{
+						var c={};
+						c['year']=y;
+						aux[y]=c;
+					}
+					c[u]=rates[u][y];
+				});
+			});
+			
+			for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
+			
+			var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+			var dt=new Date();
+			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+			saveAs(blob, 'prodes_rates_'+dt+'.csv');
+		};
 		// build download data
 		d3.select('#downloadTableBtn')
-	    .on('click', function() {
-	    	var ufs=[],years=[],rates=[];
-	    	
-	    	graph.data2csv.forEach(function(d) {
-	    		if(ufs.indexOf(d.uf)<0){
-	    			ufs.push(d.uf);
-	    			rates[d.uf]=[]
-	    		}
-	    		if(years.indexOf(d.year)<0){
-	    			years.push(d.year);
-	    		}
-	    		
-    			rates[d.uf][d.year]=d.originalRate;
-			});
-	    	var csv=[],aux={};
-	    	ufs.forEach(function(u) {
-		    	years.forEach(function(y) {
-		    		if(aux[y]) {
-		    			c=aux[y];
-		    		}else{
-		    			var c={};
-		    			c['year']=y;
-		    			aux[y]=c;
-		    		}
-		    		c[u]=rates[u][y];
-		    	});
-	    	});
-	    	for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
+		.on('click', downloadCSVWithFilter);
 
-	        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
-	        var dt=new Date();
-	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-	        saveAs(blob, 'prodes_rates_'+dt+'.csv');
-	    });
+		d3.select('#download-csv-all')
+		.on('click', downloadCSVWithoutFilter);
+		
+		d3.select('#download-csv-filtered')
+	    .on('click', downloadCSVWithFilter);
 		
 		d3.select('#prepare_print')
 	    .on('click', function() {

@@ -83,12 +83,23 @@ div .dc-chart {
 	fill: black;
 	font-size: x-small;
 }
+#display_warning, i .glyphicon, .glyphicon-trash{
+	display: unset !important;
+}
 .glyphicon{
 	color: #368fb3;
 	display: none;
 }
 .nav .glyphicon, button .glyphicon{
 	color: #ffffff;
+	display: unset;
+}
+h4 a:hover,h4 a:focus {
+    text-decoration: unset;
+}
+.nav li a:hover,.nav li a:focus{
+	background-color: #171c5c !important;
+	border: 1px solid gray;
 }
 .info{
 	text-align: center;

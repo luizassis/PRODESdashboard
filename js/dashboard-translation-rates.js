@@ -2,7 +2,7 @@ var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
 		'txt1':'Taxas de desmatamento',
-		'txt2':'Áreas de incremento de desmatamento',
+		'txt2':'Incrementos de desmatamento',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
 		'txt5':'Escuro/Claro',
@@ -37,7 +37,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt31':'Imprimir',
 		"warning-txt":'As taxas de 2017 ainda são estimativas.',
-		'txt32':'Nota: Clique no texto para expandir/colapsar os painéis.',
+		'txt32':'Nota: Clique no texto para expandir/recolher os painéis.',
 		/* titles for HTML entities */
 		'panel_swap':'Ir para o painel de incrementos anuais de desmatamento.',
 		'downloadBtn':'Baixar a tabela de taxas de desmatamento em formato CSV.',
@@ -63,7 +63,7 @@ var Translation={
 	'en':{
 		/* texts into HTML entities */
 		'txt1':'Deforestation rates',
-		'txt2':'Deforestation increment areas',
+		'txt2':'Deforestation increments',
 		'txt3':'Download',
 		'txt4':'Print',
 		'txt5':'Dark/Light',
