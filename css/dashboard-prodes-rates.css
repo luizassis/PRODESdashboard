@@ -63,6 +63,7 @@ div .dc-chart {
 	border: solid 1px #ccc;
 }
 #print_page{
+	display: inline-block;
 	position: relative;
 	width: 100%;
     text-align: end;
