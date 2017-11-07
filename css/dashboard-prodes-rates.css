@@ -40,6 +40,13 @@ div .dc-chart {
 .nav li.active #txt1{
 	color: black;
 	background-color: white;
+	line-height: 22px;
+}
+#txt2{
+	line-height: 22px;
+}
+.navbar{
+	border-bottom: 0px;
 }
 .navbar-nav {
 	font-size: large;
@@ -98,9 +105,11 @@ div .dc-chart {
 h4 a:hover,h4 a:focus {
     text-decoration: unset;
 }
-.nav li a:hover,.nav li a:focus{
-	background-color: #171c5c !important;
-	border: 1px solid gray;
+.nav li a:hover, .nav li a:focus,.nav a:hover .glyphicon, .nav a:focus .glyphicon {
+	background-color: white !important;
+	color: black !important;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 .info{
 	text-align: center;
