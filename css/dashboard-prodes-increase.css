@@ -82,9 +82,16 @@ body{
 	color: #368fb3;
 	display: none;
 }
+#display_warning, .glyphicon-trash{
+	display: unset !important;
+}
 .nav .glyphicon, button .glyphicon{
 	color: #ffffff;
 	display: unset;
+}
+.nav li a:hover,.nav li a:focus{
+	background-color: #171c5c !important;
+	border: 1px solid gray;
 }
 .keep-space{
 	position: relative;
