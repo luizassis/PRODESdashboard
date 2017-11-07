@@ -27,3 +27,7 @@ text.pie-slice{
 .modal-content {
  	background-color: #150f0f;
 }
+.nav li.active #txt1{
+	color: white !important;
+	background-color: #396858 !important;
+}

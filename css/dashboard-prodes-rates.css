@@ -111,6 +111,11 @@ h4 a:hover,h4 a:focus {
 	margin-left: 2px;
 	margin-right: 2px;
 }
+.navbar-right li a:hover,.navbar-right li a:focus{
+	background-color: inherit !important;
+	color: inherit !important;
+	margin: 0px;
+}
 .info{
 	text-align: center;
 	font-size: large;
