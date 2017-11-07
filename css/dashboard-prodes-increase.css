@@ -33,6 +33,13 @@ body{
 .y-axis-label, .x-axis-label{
 	font-size: small;
 }
+.nav li.active #txt2{
+	color: black;
+	background-color: white;
+}
+.navbar-nav {
+	font-size: large;
+}
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
 }

@@ -13,18 +13,24 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid" style="clear: both; color: black;">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes"><img src="./img/prodes-icon.jpeg" alt="PRODES icon" height="50" width="69" /></a>
-				<span class="navbar-brand" id="txt1">PRODES Amazônia</span>
+				<a class="navbar-brand nav-brand-left" href="http://www.inpe.br/">
+					<img src="./img/logo_INPE.png" alt="INPE icon" class="img-rounded" height="35" width="45" />
+				</a>
+				<a class="navbar-brand nav-brand-left" href="http://www.obt.inpe.br/OBT/home">
+					<img src="./img/logo_OBT.png" alt="OBT icon" class="img-rounded" height="35" width="80" />
+				</a>	
 			</div>
-			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+			<!--<div class="collapse navbar-collapse" id="navbar-collapse-1">-->
 				<ul class="nav navbar-nav">
 					<li>
 						<a href="prodes-rates.html" id="panel_swap" title="Ir para o painel de consulta a taxas anuais de desmatamento.">
-						<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Ir para o painel de taxas</span>
+						<!--<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;" /> &nbsp;-->
+						<!--<span id="txt1">Taxas de desmatamento</span>-->
+						<span id="txt1">Taxas de desmatamento</span>
 						</a>
+					</li>
+					<li class="active">
+						<a id="txt2">Incrementos de desmatamento</a>
 					</li>
 					<li>
 						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incrementos de desmatamento em formato CSV.">
@@ -51,7 +57,7 @@
 					</a></li>
 					<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
 				</ul>
-			</div>
+			<!--</div>-->
 		</div>
 	</nav>
 	<div class="container-fluid">
@@ -113,8 +119,7 @@
 				<div class="modal fade" id="modal-container-info-rates" role="dialog" aria-labelledby="info-rates" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<div class="modal-header">
-									
+							<div class="modal-header">									
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 									×
 								</button>
