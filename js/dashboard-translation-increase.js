@@ -1,8 +1,8 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
-		'txt1':'PRODES Amazônia',
-		'txt2':'Ir para o painel de taxas',
+		'txt1':'Taxas de desmatamento',
+		'txt2':'Incrementos de desmatamento',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
 		'txt5':'Escuro/Claro',
@@ -60,8 +60,8 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
-		'txt1':'PRODES Amazonia',
-		'txt2':'Goto the rates panel',
+		'txt1':'Deforestation rates',
+		'txt2':'Deforestation increments',
 		'txt3':'Download Data',
 		'txt4':'Print',
 		'txt5':'Dark/Light',
