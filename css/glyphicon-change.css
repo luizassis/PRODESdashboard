@@ -6,6 +6,7 @@
 	color: red;
 }
 .glyphicon-refresh-animate {
+    display: inline-block !important;
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
 }

@@ -72,6 +72,12 @@ var utils = {
 			});
 		});
 	},
+	loadingShow: function(ctl) {
+		d3.select('#panel_container').style('display', (ctl)?('none'):(''));
+		d3.select('#display_loading').style('display',(ctl)?('block'):('none'));
+		document.getElementById("inner_display_loading").innerHTML=(ctl)?
+		('<span id="animateIcon" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>'):('');
+	},
 	displayError:function(error) {
 		d3.select('#panel_container').style('display','none');
 		d3.select('#display_error').style('display','block');
@@ -214,6 +220,7 @@ var graph={
 		this.relativeRatesDataTable = dataTable("relative-rates-data-table");
 	},
 	loadData: function() {
+		utils.loadingShow(true);
 		// download data in CSV format from PRODES WFS service.
 		// var url="http://terrabrasilis.info/fip-service/fip-project-prodes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fip-project-prodes:prodes_rates_d&outputFormat=csv";
 		// d3.csv(url, graph.processData);
@@ -230,6 +237,7 @@ var graph={
 		// d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
+		utils.loadingShow(false);
 		if (error) {
 			utils.displayError( error );
 			return;
