@@ -10,54 +10,59 @@
    	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-rates.css" />
    	<link rel="stylesheet" type="text/css" href="./css/dashboard-print.css" media="print" />
 </head>
-<body>	
-	<nav class="navbar navbar-inverse"> 
-		<div class="container-fluid" style="clear: both; color: black;">				
-			<div class="navbar-header">									
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid" style="clear: both; color: black;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand nav-brand-left" href="http://www.inpe.br/">
 					<img src="./img/logo_INPE.png" alt="INPE icon" class="img-rounded" height="35" width="45" />
 				</a>
 				<a class="navbar-brand nav-brand-left" href="http://www.obt.inpe.br/OBT/home">
 					<img src="./img/logo_OBT.png" alt="OBT icon" class="img-rounded" height="35" width="80" />
-				</a>						
+				</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li class="active">
-					<a id="txt1">Taxas de desmatamento</a>
-				</li>	
-				<li>
-					<a href="prodes-increase.html" id="panel_swap" title="Ir para o painel de consulta aos incrementos anuais de desmatamento.">
-						<!--<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;-->
-						<span id="txt2">Incrementos de desmatamento</span>
-					</a>					
-				</li>
-				<li>
-					<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
-						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-						<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
-					</a>
-				</li>
-				<li>
-					<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
-						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
-					</a>
-				</li>
-				<li>
-					<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
-						<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escurecer/clarear</span>
-					</a>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="#">
-						<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil." />&nbsp;&nbsp;
-						<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English." />&nbsp;&nbsp;
-						<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español." />
-					</a>
-				</li>
-				<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
-			</ul>			
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a id="txt1">Taxas de desmatamento</a>
+					</li>	
+					<li>
+						<a href="prodes-increase.html" id="panel_swap" title="Ir para o painel de consulta aos incrementos anuais de desmatamento.">
+							<!--<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;-->
+							<span id="txt2">Incrementos de desmatamento</span>
+						</a>					
+					</li>
+					<li>
+						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
+							<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
+							<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
+							<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
+							<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escurecer/clarear</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="#">
+							<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil." />&nbsp;&nbsp;
+							<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English." />&nbsp;&nbsp;
+							<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español." />
+						</a>
+					</li>
+					<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt6">Entrar</span></a></li -->
+				</ul>
+			</div>
 		</div>
 	</nav>
 	<div class="container">
