@@ -66,7 +66,7 @@ var Translation={
 		'txt4':'Print',
 		'txt5':'Dark/Light',
 		'txt6':'Login',
-		'txt7':'Annual deforestation increment area in the Brazilian Legal Amazon in the five last years',
+		'txt7':'Annual deforestation increment area in the Brazilian Legal Amazon of the five last years',
 		'txt8':'Filter:',
 		'txt9':'Clean this filter.',
 		'txt10':'Filter:',
