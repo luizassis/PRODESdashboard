@@ -72,8 +72,22 @@ var utils = {
 			});
 		});
 	},
-	displayLoadError: function(error) {
-		console.log("Implement the error display! Error: ("+error+")");
+	displayError:function(error) {
+		d3.select('#panel_container').style('display','none');
+		d3.select('#display_error').style('display','block');
+		document.getElementById("inner_display_error").innerHTML=Translation[Lang.language].failure_load_data+
+		'<span id="dtn_refresh" class="glyphicon glyphicon-refresh" aria-hidden="true" title="'+Translation[Lang.language].refresh_data+'"></span>';
+		setTimeout(function(){
+			d3.select('#dtn_refresh').on('click', function() {
+				window.location.reload();
+		    });
+		}, 300);
+	},
+	displayNoData:function() {
+		this.displayError(Translation[Lang.language].no_data);
+	},
+	displayGraphContainer:function() {
+		d3.select('#panel_container').style('display','block');
 	}
 };
 
@@ -203,7 +217,7 @@ var graph={
 		// download data in CSV format from PRODES WFS service.
 		// var url="http://terrabrasilis.info/fip-service/fip-project-prodes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fip-project-prodes:prodes_rates_d&outputFormat=csv";
 		// d3.csv(url, graph.processData);
-		
+
 		// load data from CSV file
 		d3.csv("data/prodes_rates_d.csv", graph.processData);
 		
@@ -216,27 +230,35 @@ var graph={
 		// d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
-		if (error) throw error;
+		if (error) {
+			utils.displayError( error );
+			return;
+		}else if(!data) {
+			utils.displayNoData();
+			return;
+		}else {
+			utils.displayGraphContainer();
 
-		var o=[],t=[];
-		for (var j = 0, n = data.length; j < n; ++j) {
-			var obj={
-				uf:data[j].state,
-				year:data[j].year,
-				rate:+data[j].rate,
-				ufYear:data[j].state + "/" + data[j].year
-			};
-			if(data[j].state=='AMZ') {
-				t.push(obj);
-			}else{
-				o.push(obj);
+			var o=[],t=[];
+			for (var j = 0, n = data.length; j < n; ++j) {
+				var obj={
+					uf:data[j].state,
+					year:data[j].year,
+					rate:+data[j].rate,
+					ufYear:data[j].state + "/" + data[j].year
+				};
+				if(data[j].state=='AMZ') {
+					t.push(obj);
+				}else{
+					o.push(obj);
+				}
 			}
+			data = o;
+			graph.data_all = t;
+			graph.registerDataOnCrossfilter(data);
+			graph.setChartReferencies();
+			graph.build();
 		}
-		data = o;
-		graph.data_all = t;
-		graph.registerDataOnCrossfilter(data);
-		graph.setChartReferencies();
-		graph.build();
 	},
 	registerDataOnCrossfilter: function(data) {
 		graph.data=data;
@@ -572,12 +594,7 @@ var graph={
 	init: function() {
 		window.onresize=utils.onResize;
 		this.loadConfigurations(function(){
-			try{
-				graph.loadData();
-			}catch (e) {
-				// TODO: handle exception
-				utils.displayLoadError(e);
-			}
+			graph.loadData();
 			utils.collapsePanel();
 		});
 	},

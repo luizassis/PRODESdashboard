@@ -58,7 +58,10 @@ var Translation={
 		'percent':'Porcentagem: ',
 		'lineYAxis':'Estimativa anual de desmatamento (km²/ano)',
 		'lineXAxis':'Período de monitoramento da Amazônia Legal Brasileira: ',
-		'tableYearState':'Ano / Estado'
+		'tableYearState':'Ano / Estado',
+		'failure_load_data':'Falhou ao carregar os dados. ',
+		'refresh_data':'Repetir a carga dos dados.',
+		'no_data':'Sem dados para exibir. '
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -119,7 +122,10 @@ var Translation={
 		'percent':'Percentage: ',
 		'lineYAxis':'Annual deforestation area by State (km²/year)',
 		'lineXAxis':'Brazilian Legal Amazon Monitoring Period: ',
-		'tableYearState':'Year / State'
+		'tableYearState':'Year / State',
+		'failure_load_data':'Failure on load the data. ',
+		'refresh_data':'Try load data.',
+		'no_data':'No data to show. '
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -178,6 +184,9 @@ var Translation={
 		'percent':'Percentage: ',
 		'lineYAxis':'Deforestation by State (km²/year)',
 		'lineXAxis':'Monitoring period by Amazônia Legal: ',
-		'tableYearState':'Ano / Estado'
+		'tableYearState':'Ano / Estado',
+		'failure_load_data':'Failure on load the data. ',
+		'refresh_data':'Try load data.',
+		'no_data':'No data to show. '
 	}
 };

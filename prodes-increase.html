@@ -73,7 +73,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid" id="panel_container" style="display:none;">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
 				<span id="txt7">Incremento anual de área desmatada na Amazônia Legal para os últimos 5 anos</span>
@@ -224,7 +224,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="footer_page"></div>
+	<div id="display_error">
+		<span id="inner_display_error">
+		
+		</span>
+	</div>
 	<div id="print_information" style="display:none;" onclick="this.style.display='none';">
 		<span class="info_p"><span id="txt30">
 			A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
@@ -237,6 +241,7 @@
 			</span>
 		</span>
 	</div>
+	<div id="footer_page"></div>
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
 	<script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
