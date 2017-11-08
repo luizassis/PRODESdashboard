@@ -21,9 +21,9 @@ var Translation={
 		'txt18':'Variações relativas das taxas anuais de desmatamento (%)',
 		'txt19':'Informações complementares',
 		'txt20':'A taxa de desmatamento apresentada para o ano de 1988 corresponde a <strong>taxa média de desmatamento obtida entre 1977 e 1988.</strong>',
-		'txt21':'As taxas de desmatamento apresentadas para os anos 1993 e 1994 representam a <strong>média entre os dois anos.</strong>',
-		'txt22':'2004 - início do',
-		'txt23':'Para mais informações (acesse o projeto PRODES)',
+		'txt21':'As taxas de desmatamento apresentadas para os anos 1993 e 1994 representam a <strong>taxa média de desmatamento obtida entre esses dois anos.</strong>.',
+		/*'txt22':'2004 - início do',*/
+		'txt23':'Para mais informações, acesse o projeto PRODES',
 		'txt24':'Fechar',
 		'txt25':'Informações para download',
 		'txt26':'Baixar uma tabela com as taxas de desmatamento em formato CSV.',
@@ -83,8 +83,8 @@ var Translation={
 		'txt19':'Additional information',
 		'txt20':'1988 deforestation rate corresponds to the <strong>mean of the deforestation rates found between 1977 and 1988.</strong>',
 		'txt21':'1993 and 1994 deforestation rates correspond to the <strong>mean of the deforestation rates found between these years. </ Strong>',
-		'txt22':'2004 - start of',
-		'txt23':'For more information (see PRODES project)',
+		/*'txt22':'2004 - start of',*/
+		'txt23':'For more information, see PRODES project',
 		'txt24':'Close',
 		'txt25':'Download information',
 		'txt26':'Download a deforestation rate table in CSV format.',
