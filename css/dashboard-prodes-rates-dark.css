@@ -15,6 +15,9 @@ text.pie-slice{
 .glyphicon{
 	color: white !important;
 }
+.glyphicon-chevron-right{
+	color: black !important;
+}
 .table-hover tbody tr:hover td{
 	color: #4d4d4d !important;
 }
