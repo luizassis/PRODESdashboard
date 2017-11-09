@@ -56,7 +56,10 @@ var Translation={
 		'state':'Estado: ',
 		'county':'Município',
 		'protectedArea':'Área de Proteção',
-		'percent':'Porcentagem: '
+		'percent':'Porcentagem: ',
+		'failure_load_data':'Falhou ao carregar os dados. ',
+		'refresh_data':'Repetir a carga dos dados.',
+		'no_data':'Sem dados para exibir. '
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -115,7 +118,10 @@ var Translation={
 		'state':'State: ',
 		'county':'Municipality',
 		'protectedArea':'Protected Area',
-		'percent':'Percentage: '
+		'percent':'Percentage: ',
+		'failure_load_data':'Failure to load data. ',
+		'refresh_data':'Try to load data. ',
+		'no_data':'No data to show. '
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -174,6 +180,9 @@ var Translation={
 		'state':'Estado: ',
 		'county':'Município',
 		'protectedArea':'Área de Protección',
-		'percent':'Porcentaje: '
+		'percent':'Porcentaje: ',
+		'failure_load_data':'Fallo al cargar los datos. ',
+		'refresh_data':'Intenta cargar datos.',
+		'no_data':'No hay datos para mostrar. '
 	}
 };

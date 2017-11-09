@@ -78,8 +78,28 @@ var utils = {
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
 	},
-	displayLoadError: function(error) {
-		console.log("Implement the error display! Error: ("+error+")");
+	loadingShow: function(ctl) {
+		d3.select('#panel_container').style('display', (ctl)?('none'):(''));
+		d3.select('#display_loading').style('display',(ctl)?('block'):('none'));
+		document.getElementById("inner_display_loading").innerHTML=(ctl)?
+		('<span id="animateIcon" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span>'):('');
+	},
+	displayError:function(error) {
+		d3.select('#panel_container').style('display','none');
+		d3.select('#display_error').style('display','block');
+		document.getElementById("inner_display_error").innerHTML=Translation[Lang.language].failure_load_data+
+		'<span id="dtn_refresh" class="glyphicon glyphicon-refresh" aria-hidden="true" title="'+Translation[Lang.language].refresh_data+'"></span>';
+		setTimeout(function(){
+			d3.select('#dtn_refresh').on('click', function() {
+				window.location.reload();
+		    });
+		}, 300);
+	},
+	displayNoData:function() {
+		this.displayError(Translation[Lang.language].no_data);
+	},
+	displayGraphContainer:function() {
+		d3.select('#panel_container').style('display','block');
 	}
 };
 
@@ -183,31 +203,41 @@ var graph={
 		this.rowTop10ByUc = dc.rowChart("#chart-by-uc");
 	},
 	loadData: function() {
+		utils.loadingShow(true);
 		// Download the deforestation data from PRODES WFS service.
 		// http://terrabrasilis.info/prodes-data/PRODES/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=PRODES:prodes_d&outputFormat=application%2Fjson
 		d3.json("data/prodes.json", graph.processData);
 	},
 	processData: function(error, data) {
-		if (error) throw error;
+		utils.loadingShow(false);
+		if (error) {
+			utils.displayError( error );
+			return;
+		}else if(!data) {
+			utils.displayNoData();
+			return;
+		}else {
+			utils.displayGraphContainer();
 		
-		var o=[];
-		for (var j = 0, n = data.totalFeatures; j < n; ++j) {
-			var fet=data.features[j];
-			var uc=(fet.properties.j)?(fet.properties.j+"/"+fet.properties.h):(null)
-			o.push({
-				year:+fet.properties.g,
-				aTotal:+fet.properties.d,
-				aMun:+fet.properties.e,
-				aUc:+fet.properties.f,
-				uf:fet.properties.h,
-				mun:fet.properties.i+"/"+fet.properties.h,
-				uc:uc,
-				cl:fet.properties.c
-			});
+			var o=[];
+			for (var j = 0, n = data.totalFeatures; j < n; ++j) {
+				var fet=data.features[j];
+				var uc=(fet.properties.j)?(fet.properties.j+"/"+fet.properties.h):(null)
+				o.push({
+					year:+fet.properties.g,
+					aTotal:+fet.properties.d,
+					aMun:+fet.properties.e,
+					aUc:+fet.properties.f,
+					uf:fet.properties.h,
+					mun:fet.properties.i+"/"+fet.properties.h,
+					uc:uc,
+					cl:fet.properties.c
+				});
+			}
+			data = o;
+			graph.registerDataOnCrossfilter(data);
+			graph.build();
 		}
-		data = o;
-		graph.registerDataOnCrossfilter(data);
-		graph.build();
 	},
 	registerDataOnCrossfilter: function(data) {
 		graph.data=data;
@@ -380,7 +410,6 @@ var graph={
 			try{
 				graph.loadData();
 			}catch (e) {
-				// TODO: handle exception
 				utils.displayLoadError(e);
 			}
 		});

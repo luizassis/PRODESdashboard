@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-3.2.0.min.css" />
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
+	<link rel="stylesheet" type="text/css" href="./css/glyphicon-change.css" />
 	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
 	<link rel="stylesheet" type="text/css" href="./css/dashboard-prodes-increase.css" />
 	<link rel="stylesheet" type="text/css" href="./css/dashboard-print.css" media="print" />
@@ -38,7 +39,6 @@
 					<li>
 						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incrementos de desmatamento em formato CSV.">
 						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-						<span id="animateIconDown" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
 						</a>
 					</li>
 					<li>
@@ -49,6 +49,16 @@
 					<li>
 						<a href="#" id="change_style" title="Alternar o estilo de apresentação escuro/claro.">
 						<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://terrabrasilis.info/composer/PRODES" target="_blanck" id="goto_map" title="Ir para o perfil PRODES no TerraBrasilis.info para visualização do mapa.">
+							<span id="btn_style" class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<span id="txt1a">Mapa</span>
+						</a>
+					</li>
+					<li>
+						<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
+							<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="txt1b">Introdução</span>
 						</a>
 					</li>
 				</ul>
@@ -63,7 +73,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid" id="panel_container" style="display:none;">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
 				<span id="txt7">Incremento anual de área desmatada na Amazônia Legal para os últimos 5 anos</span>
@@ -179,10 +189,43 @@
 						</div>
 					</div>
 				</div>
+				<!-- modal window with information and video to help about this panel -->
+				<div class="modal fade" id="modal-container-video" role="dialog" aria-labelledby="video-increase" aria-hidden="true">
+					<div class="modal-dialog" style="width:900px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="video-increase">
+									<span id="txt1c">Informações de ajuda para uso do painel</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+								<div class="embed-video">
+									<video width="880" height="500" controls>
+										<source src="movies/dashboard-increase-in-action.mp4" type="video/mp4">
+										<track src="movies/subtitles/dashboard-increase-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+										<track src="movies/subtitles/dashboard-increase-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+										<track src="movies/subtitles/dashboard-increase-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
+										Your browser does not support the video tag.
+									</video>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt1e">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div id="footer_page"></div>
+	<div id="display_error"><span id="inner_display_error"></span></div>
+	<div id="display_loading"><span id="inner_display_loading"></span></div>
 	<div id="print_information" style="display:none;" onclick="this.style.display='none';">
 		<span class="info_p"><span id="txt30">
 			A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
@@ -195,6 +238,7 @@
 			</span>
 		</span>
 	</div>
+	<div id="footer_page"></div>
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
 	<script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
