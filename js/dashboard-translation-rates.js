@@ -190,4 +190,5 @@ var Translation={
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. '
 	}
+	
 };
