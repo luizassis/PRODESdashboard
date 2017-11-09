@@ -337,8 +337,8 @@ var graph={
 			});
 			this.rowTop10ByMun.filterAll();
 			this.rowTop10ByMun.filter(d[0].key);
-			dc.redrawAll();
 		}
+		dc.redrawAll();
 	},
 	build: function() {
 
@@ -355,7 +355,8 @@ var graph={
 				return Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return localeBR.numberFormat(',1f')(Math.round(d.data.value)) + " km²";
+				var v=Math.round(d.data.value);
+				return localeBR.numberFormat(',1f')( (v>0)?(v):(d.data.value.toFixed(2)) ) + " km²";
 			})
 			.elasticY(true)
 			.yAxisPadding('10%')
@@ -372,7 +373,7 @@ var graph={
 			.innerRadius(10)
 			.externalRadiusPadding(30)
 			.dimension(this.ufDimension)
-			.group(this.ufAreaMunGroup)
+			.group(utils.snapToZero(this.ufAreaMunGroup))
 			.title(function(d) {
 				var t=utils.totalRateCalculator();
 				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
@@ -438,6 +439,10 @@ var graph={
 		}).ticks(5);
 
 		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
+		this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
+			graph.applyCountyFilter(null);
+			return [];
+		});
 		
 		utils.setTitle('uc',Translation[Lang.language].rowUcTitle);
 
@@ -461,7 +466,7 @@ var graph={
 		this.rowTop10ByUc.data(function (group) {
 			var fakeGroup=[];
 			fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
-			return (group.all().length>0)?(group.top(10)):(fakeGroup);
+			return (group.top(10).length>0)?(group.top(10)):(fakeGroup);
 		});
 		
 		this.rowTop10ByUc.on("preRedraw", barHeightAdjust);
