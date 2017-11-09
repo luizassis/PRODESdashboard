@@ -59,7 +59,9 @@ var Translation={
 		'percent':'Porcentagem: ',
 		'failure_load_data':'Falhou ao carregar os dados. ',
 		'refresh_data':'Repetir a carga dos dados.',
-		'no_data':'Sem dados para exibir. '
+		'no_data':'Sem dados para exibir. ',
+		'no_value':'Sem valor',
+		'not_found':'Não encontrou item para esta pesquisa.'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -121,7 +123,9 @@ var Translation={
 		'percent':'Percentage: ',
 		'failure_load_data':'Failure on load the data. ',
 		'refresh_data':'Try load data.',
-		'no_data':'No data to show. '
+		'no_data':'No data to show. ',
+		'no_value':'No value',
+		'not_found':'No search data to show'
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -183,6 +187,8 @@ var Translation={
 		'percent':'Porcentagem: ',
 		'failure_load_data':'Falhou ao carregar os dados. ',
 		'refresh_data':'Repetir a carga dos dados.',
-		'no_data':'Sem dados para exibir. '
+		'no_data':'Sem dados para exibir. ',
+		'no_value':'Sem valor',
+		'not_found':'Não encontrou item para esta pesquisa.'
 	}
 };
