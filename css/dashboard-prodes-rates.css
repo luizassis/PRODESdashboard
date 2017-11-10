@@ -49,7 +49,7 @@ div .dc-chart {
 	border-bottom: 0px;
 }
 .navbar-nav {
-	font-size: large;
+	line-height: 20px;
 }
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
