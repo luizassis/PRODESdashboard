@@ -36,29 +36,34 @@
 					<li class="active">
 						<a id="txt2">Incrementos de desmatamento</a>
 					</li>
-					<li>
-						<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incrementos de desmatamento em formato CSV.">
-						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" id="prepare_print" title="Imprimir esta página utilizando recurso do navegador.">
-						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" id="change_style" title="Alternar o estilo de apresentação escuro/claro.">
-						<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
-						</a>
-					</li>
-					<li>
-						<a href="http://terrabrasilis.info/composer/PRODES" target="_blanck" id="goto_map" title="Ir para o perfil PRODES no TerraBrasilis.info para visualização do mapa.">
-							<span id="btn_style" class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<span id="txt1a">Mapa</span>
-						</a>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="tools">Ferramentas <span class="caret"></span></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
+									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
+									<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
+								</a>
+							</li>
+							<li>
+								<a href="http://terrabrasilis.info/composer/PRODES" target="_blanck" id="goto_map" title="Ir para o perfil PRODES no TerraBrasilis.info para visualização do mapa.">
+									<span id="btn_style" class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<span id="txt1a">Mapa</span>
+								</a>
+							</li>							
+						</ul>			
 					</li>
 					<li>
 						<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-							<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="txt1b">Introdução</span>
+							<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="help">Ajuda</span>
 						</a>
 					</li>
 				</ul>

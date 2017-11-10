@@ -33,6 +33,10 @@ body{
 .y-axis-label, .x-axis-label{
 	font-size: small;
 }
+.dropdown-menu {
+	background-color: #222;
+	color:#fff;
+}
 .nav li.active #txt2{
 	color: black;
 	background-color: white;

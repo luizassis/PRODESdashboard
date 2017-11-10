@@ -37,7 +37,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt31':'Imprimir',
 		"warning-txt":'As taxas de 2017 ainda são estimativas.',
-		'txt32':'Nota: Clique no texto para expandir/recolher os painéis.',
+		'txt32':'<strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.',
 		/* titles for HTML entities */
 		'panel_swap':'Ir para o painel de incrementos anuais de desmatamento.',
 		'downloadBtn':'Baixar a tabela de taxas de desmatamento em formato CSV.',
@@ -61,7 +61,9 @@ var Translation={
 		'tableYearState':'Ano / Estado',
 		'failure_load_data':'Falhou ao carregar os dados. ',
 		'refresh_data':'Repetir a carga dos dados.',
-		'no_data':'Sem dados para exibir. '
+		'no_data':'Sem dados para exibir. ',
+		'tools': 'Ferramentas <span class="caret"></span>',
+		'help' : 'Ajuda'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -101,7 +103,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- Paper margins: browser default values.<br />',
 		'txt31':'Print',
 		"warning-txt":'2017 deforestation rate is still an estimation.',
-		'txt32':'Note: Click on the text to expand/collapse the panels.',
+		'txt32':'<strong>Note:</strong> Click on the text to expand/collapse the panels.',
 		/* titles for HTML entities */
 		'panel_swap':'Go to the deforestation increment rate panel.',
 		'downloadBtn':'Download the deforestation rates table in a CSV format.',
@@ -125,7 +127,9 @@ var Translation={
 		'tableYearState':'Year / State',
 		'failure_load_data':'Failure to load data. ',
 		'refresh_data':'Try to load data.',
-		'no_data':'No data to show. '
+		'no_data':'No data to show. ',
+		'tools': 'Tools <span class="caret"></span>',
+		'help' : 'Help'
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -164,7 +168,8 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- El tamaño de papel es A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- Y elegir una configuración de margen predefinida por el navegador.<br />',
 		'txt31':'Imprimir',
-		'txt32':'Nota: Haga clic en el texto para expandir/contraer los paneles.',
+		"warning-txt":'Tasa de deforestación en 2017 sigue siendo una estimación.',
+		'txt32':'<strong>Nota:</strong> Haga clic en el texto para expandir/contraer los paneles.',
 		/* titles for HTML entities */
 		'panel_swap':'Ir al panel de consulta a incrementos de deforestación.',
 		'downloadBtn':'Descargar la tabla de tasas de deforestación en formato CSV.',
@@ -188,7 +193,9 @@ var Translation={
 		'tableYearState':'Año / Estado',
 		'failure_load_data':'Fallo al cargar los datos. ',
 		'refresh_data':'Intenta cargar datos.',
-		'no_data':'No hay datos para mostrar. '
+		'no_data':'No hay datos para mostrar. ',
+		'tools': 'Herramientas <span class="caret"></span>',
+		'help': 'Ayuda'
 	}
-	
+
 };

@@ -34,6 +34,10 @@ body{
 div .dc-chart {
     float: none;
 }
+.dropdown-menu {
+	background-color: #222;
+	color:#fff;
+}
 .y-axis-label, .x-axis-label{
 	font-size: small;
 }
