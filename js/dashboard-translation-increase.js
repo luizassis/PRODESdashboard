@@ -49,8 +49,8 @@ var Translation={
 		'barYAxis':'Incremento no desmatamento (km²/ano)',
 		'barXAxis':'Ano de apuração do desmatamento',
 		'pieTitle':'Desmatamento Total por Estado',
-		'rowMunTitle':'Os 10 piores índices de desmatamento em Municípios.',
-		'rowUcTitle':'Os 10 piores índices de desmatamento em Áreas de Proteção',
+		'rowMunTitle':'Os municípios com maiores incrementos de desmatamento',
+		'rowUcTitle':'As áreas de proteção com maiores incrementos de desmatamento',
 		'area':'Área: ',
 		'year':'Ano: ',
 		'state':'Estado: ',
@@ -113,8 +113,8 @@ var Translation={
 		'barYAxis':'Deforestation increment (km²/year)',
 		'barXAxis':'Year of deforestation detection',
 		'pieTitle':'Deforestation increment by State',
-		'rowMunTitle':'Municipalities with the worst deforestation increment areas',
-		'rowUcTitle':'Protected areas with the worst deforestation increment areas',
+		'rowMunTitle':'Municipalities with the largest deforestation increment areas',
+		'rowUcTitle':'Protected areas with the largest deforestation increment areas',
 		'area':'Area: ',
 		'year':'Year: ',
 		'state':'State: ',
@@ -177,8 +177,8 @@ var Translation={
 		'barYAxis':'Incremento de deforestácion (km²/año)',
 		'barXAxis':'Año de detección de la deforestación',
 		'pieTitle':'Deforestación total por Estado',
-		'rowMunTitle':'Los 10 peores índices de deforestación municipales.',
-		'rowUcTitle':'Los 10 peores índices de deforestación en áreas de protección ',
+		'rowMunTitle':'Municipalidades con los mayores incrementos de deforestación',
+		'rowUcTitle':'Áreas de protección con los mayores incrementos de deforestación',
 		'area':'Área: ',
 		'year':'Año: ',
 		'state':'Estado: ',
@@ -191,5 +191,5 @@ var Translation={
 		'no_value':'Sem valor',
 		'not_found':'Não encontrou item para esta pesquisa.'
 	}
-	
+
 };
