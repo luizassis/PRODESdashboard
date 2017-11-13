@@ -60,6 +60,8 @@ var Translation={
 		'failure_load_data':'Falhou ao carregar os dados. ',
 		'refresh_data':'Repetir a carga dos dados.',
 		'no_data':'Sem dados para exibir. ',
+		'tools': 'Ferramentas <span class="caret"></span>',
+		'help': 'Ajuda',
 		'no_value':'Sem valor',
 		'not_found':'Não encontrou item para esta pesquisa.'
 	},
@@ -71,7 +73,7 @@ var Translation={
 		'txt4':'Print',
 		'txt5':'Dark/Light',
 		'txt6':'Login',
-		'txt7':'Annual deforestation increment area in the Brazilian Legal Amazon of the five last years',
+		'txt7':'Annual deforestation increment area in the Brazilian Legal Amazon of the last five years',
 		'txt8':'Filter:',
 		'txt9':'Clean this filter.',
 		'txt10':'Filter:',
@@ -124,6 +126,8 @@ var Translation={
 		'failure_load_data':'Failure to load data. ',
 		'refresh_data':'Try to load data. ',
 		'no_data':'No data to show. ',
+		'tools': 'Tools <span class="caret"></span>',
+		'help' : 'Help',
 		'no_value':'No value',
 		'not_found':'No search data to show'
 	},
@@ -188,6 +192,8 @@ var Translation={
 		'failure_load_data':'Fallo al cargar los datos. ',
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. ',
+		'tools': 'Herramientas <span class="caret"></span>',
+		'help': 'Ayuda',
 		'no_value':'Sem valor',
 		'not_found':'Não encontrou item para esta pesquisa.'
 	}
