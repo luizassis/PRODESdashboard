@@ -82,6 +82,18 @@ var utils = {
 			}
 		};
 	},
+	getMunOrder: function() {
+		var allTop=graph.munAreaMunGroup.top(Infinity);
+		var ar={};
+		allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
+		return ar;
+	},
+	getUCOrder: function() {
+		var allTop=graph.ucAreaUcGroup.top(Infinity);
+		var ar={};
+		allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
+		return ar;
+	},
 	addGenerationDate: function() {
 		var footer_page=document.getElementById("footer_page");
 		var footer_print=document.getElementById("footer_print");
@@ -440,8 +452,20 @@ var graph={
 
 		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
 		this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
-			graph.applyCountyFilter(null);
-			return [];
+			var pos=filters.indexOf(filter);
+			filters.splice(pos,1);
+			if(!filters.length) {
+				graph.applyCountyFilter(null);
+			}
+			return filters;
+		});
+
+		this.rowTop10ByMun.on("renderlet.a",function (chart) {
+			var texts=chart.selectAll('g.row text');
+			var rankMun=utils.getMunOrder();
+			texts[0].forEach(function(t){
+				t.innerHTML=rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '+t.innerHTML;
+			});
 		});
 		
 		utils.setTitle('uc',Translation[Lang.language].rowUcTitle);
@@ -474,6 +498,15 @@ var graph={
 		this.rowTop10ByUc.xAxis().tickFormat(function(d) {
 			return d;
 		}).ticks(5);
+
+		this.rowTop10ByUc.on("renderlet.a",function (chart) {
+			var texts=chart.selectAll('g.row text');
+			var rankUCs=utils.getUCOrder();
+			texts[0].forEach(function(t){
+				var p=(rankUCs["\""+t.innerHTML.split(":")[0]+"\""])?(rankUCs["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
+				t.innerHTML=p+t.innerHTML;
+			});
+		});
 		
 		this.updateChartsDimensions();
 		utils.addGenerationDate();
