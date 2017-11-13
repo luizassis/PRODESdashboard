@@ -60,8 +60,8 @@ div .dc-chart {
 }
 .navbar-nav {
 	line-height: 20px;
-	font-family: "Droid Sans";
 	font-size: 18px;
+	font-family: "Droid Sans";	
 }
 .navbar-inverse .navbar-nav li a {
     color: #dedede;
