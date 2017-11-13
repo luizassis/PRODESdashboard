@@ -127,7 +127,7 @@ var Translation={
 		'refresh_data':'Try to load data. ',
 		'no_data':'No data to show. ',
 		'tools': 'Tools <span class="caret"></span>',
-		'help' : 'Help'
+		'help' : 'Help',
 		'no_value':'No value',
 		'not_found':'No search data to show'
 	},
@@ -193,7 +193,7 @@ var Translation={
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. ',
 		'tools': 'Herramientas <span class="caret"></span>',
-		'help': 'Ayuda'
+		'help': 'Ayuda',
 		'no_value':'Sem valor',
 		'not_found':'Não encontrou item para esta pesquisa.'
 	}
