@@ -23,6 +23,38 @@ var utils = {
 		elementId='title-chart-by-'+elementId;
 		document.getElementById(elementId).innerHTML=title;
 	},
+	/**
+	 * anArray contains the array of objects gathering from crossfilter group.
+	 * substring is string that you want
+	 */
+	findInArray:function(anArray,substring) {
+		substring=substring.toLowerCase();
+		var found = $.grep( anArray, function ( value, i) {
+			return (value.key.toLowerCase().indexOf(substring) >= 0)
+		 });
+		 return found;
+	},
+	searchCounty:function(){
+		var r=utils.findInArray(graph.munGroup.all(), $('#search-county')[0].value);
+		if(r.length==1) {
+			utils.selectedItem(r[0].key,r[0].value);
+		}else{
+			this.showFilteredItems(r);
+		}
+	},
+	showFilteredItems: function(r) {
+		(r.length==0)?($('#txt1h').hide()):($('#txt1h').show());
+		document.getElementById("filtered-list").innerHTML=(r.length==0)?(Translation[Lang.language].not_found):("");
+		r.forEach(function(o){
+			var m=o.key.replace("'","´");
+			document.getElementById("filtered-list").innerHTML+="<li><a href=\"javascript:utils.selectedItem('"+m+"',"+o.value+");\">"+m+"</a></li>";
+		});
+		$('#modal-container-filtered').modal('show');
+	},
+	selectedItem: function(key,value) {
+		$('#modal-container-filtered').modal('hide');
+		graph.applyCountyFilter([{key:key.replace("´","'"),value:value}]);
+	},
 	totalRateCalculator: function() {
 		var itens=graph.ufAreaMunGroup.top(Infinity);
 		var t=0;
@@ -118,6 +150,7 @@ var graph={
 	ufAreaMunGroup: null,
 	ucAreaUcGroup: null,
 	munAreaMunGroup: null,
+	munGroup: null,
 	
 	data:null,
 	
@@ -268,7 +301,44 @@ var graph={
 		this.munAreaMunGroup = this.munDimension.group().reduceSum(function(d) {
 			return +d.aMun;
 		});
+
+		this.munGroup = this.munDimension.group().reduceCount(function(d) {return d;})
 		
+	},
+	applyCountyFilter: function(d){
+		if(!d || !d.length) {
+			this.rowTop10ByMun.data(function (group) {
+				var fakeGroup=[];
+				fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
+				return (group.all().length>0)?(group.top(10)):(fakeGroup);
+			});
+		}else{
+			this.rowTop10ByMun.data(function (group) {
+				var filteredGroup=[], index,allItems=group.top(Infinity);
+				allItems.findIndex(function(item,i){
+					if(item.key==d[0].key){
+						index=i;
+						filteredGroup.push({key:item.key,value:item.value});
+					}
+				});
+				var ctl=1,max=[],min=[];
+				while (ctl<=5) {
+					var item=allItems[index+ctl];
+					if(item) min.push({key:item.key,value:item.value});
+					item=allItems[index-ctl];
+					if(item) max.push({key:item.key,value:item.value});
+					++ctl;
+				}
+				filteredGroup=filteredGroup.concat(max);
+				min.reverse();
+				filteredGroup=min.concat(filteredGroup);
+				filteredGroup.reverse();
+				return filteredGroup;
+			});
+			this.rowTop10ByMun.filterAll();
+			this.rowTop10ByMun.filter(d[0].key);
+		}
+		dc.redrawAll();
 	},
 	build: function() {
 
@@ -285,7 +355,8 @@ var graph={
 				return Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
-				return localeBR.numberFormat(',1f')(Math.round(d.data.value)) + " km²";
+				var v=Math.round(d.data.value);
+				return localeBR.numberFormat(',1f')( (v>0)?(v):(d.data.value.toFixed(2)) ) + " km²";
 			})
 			.elasticY(true)
 			.yAxisPadding('10%')
@@ -302,7 +373,7 @@ var graph={
 			.innerRadius(10)
 			.externalRadiusPadding(30)
 			.dimension(this.ufDimension)
-			.group(this.ufAreaMunGroup)
+			.group(utils.snapToZero(this.ufAreaMunGroup))
 			.title(function(d) {
 				var t=utils.totalRateCalculator();
 				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
@@ -359,7 +430,7 @@ var graph={
 		
 		this.rowTop10ByMun.data(function (group) {
 			var fakeGroup=[];
-			fakeGroup.push({key:'Sem valor',value:0});
+			fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
 			return (group.all().length>0)?(group.top(10)):(fakeGroup);
 		});
 
@@ -368,6 +439,10 @@ var graph={
 		}).ticks(5);
 
 		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
+		this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
+			graph.applyCountyFilter(null);
+			return [];
+		});
 		
 		utils.setTitle('uc',Translation[Lang.language].rowUcTitle);
 
@@ -390,8 +465,8 @@ var graph={
 		
 		this.rowTop10ByUc.data(function (group) {
 			var fakeGroup=[];
-			fakeGroup.push({key:'Sem valor',value:0});
-			return (group.all().length>0)?(group.top(10)):(fakeGroup);
+			fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
+			return (group.top(10).length>0)?(group.top(10)):(fakeGroup);
 		});
 		
 		this.rowTop10ByUc.on("preRedraw", barHeightAdjust);
@@ -424,6 +499,7 @@ var graph={
 			graph.pieTotalizedByState.filterAll();
 		}else if(who=='mun'){
 			graph.rowTop10ByMun.filterAll();
+			graph.applyCountyFilter(null);
 		}else if(who=='uc'){
 			graph.rowTop10ByUc.filterAll();
 		}
@@ -534,6 +610,11 @@ window.init=function(){
 			$('#dwn3').fadeIn();
 		}, function() {
 			$('#dwn3').fadeOut();
+		});
+		$('#chart3').hover(function() {
+			$('#txt2a').fadeIn();
+		}, function() {
+			$('#txt2a').fadeOut();
 		});
 		$('#chart4').hover(function() {
 			$('#dwn4').fadeIn();

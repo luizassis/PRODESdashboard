@@ -62,6 +62,8 @@ var Translation={
 		'no_data':'Sem dados para exibir. ',
 		'tools': 'Ferramentas <span class="caret"></span>',
 		'help': 'Ajuda',
+		'no_value':'Sem valor',
+		'not_found':'Não encontrou item para esta pesquisa.'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -126,6 +128,8 @@ var Translation={
 		'no_data':'No data to show. ',
 		'tools': 'Tools <span class="caret"></span>',
 		'help' : 'Help'
+		'no_value':'No value',
+		'not_found':'No search data to show'
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -190,6 +194,8 @@ var Translation={
 		'no_data':'No hay datos para mostrar. ',
 		'tools': 'Herramientas <span class="caret"></span>',
 		'help': 'Ayuda'
+		'no_value':'Sem valor',
+		'not_found':'Não encontrou item para esta pesquisa.'
 	}
 
 };

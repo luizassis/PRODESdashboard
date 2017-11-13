@@ -17,7 +17,7 @@ body{
 .btn-download{
 	cursor: pointer;
     position: absolute;
-    top: -1px;
+	top: -1px;
 	right: 10px;
 }
 .dc-chart path.line {
@@ -25,6 +25,9 @@ body{
 }
 .dc-chart rect.bar {
 	fill-opacity: 0.8;
+}
+.dc-chart rect.selected {
+	fill: #e9e99c;
 }
 .reset, .dc-chart .pie-slice, .dc-chart g.row text{
 	fill: #000000;
