@@ -61,7 +61,7 @@ var Translation={
 		'refresh_data':'Repetir a carga dos dados.',
 		'no_data':'Sem dados para exibir. ',
 		'tools': 'Ferramentas <span class="caret"></span>',
-		'help': 'Ajuda',
+		'help': 'Ajuda <span class="caret"></span>',
 		'no_value':'Sem valor',
 		'not_found':'Não encontrou item para esta pesquisa.'
 	},
@@ -127,7 +127,7 @@ var Translation={
 		'refresh_data':'Try to load data. ',
 		'no_data':'No data to show. ',
 		'tools': 'Tools <span class="caret"></span>',
-		'help' : 'Help',
+		'help' : 'Help <span class="caret"></span>',
 		'no_value':'No value',
 		'not_found':'No search data to show'
 	},
@@ -192,10 +192,10 @@ var Translation={
 		'failure_load_data':'Fallo al cargar los datos. ',
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. ',
-		'tools': 'Herramientas <span class="caret"></span>',
-		'help': 'Ayuda',
-		'no_value':'Sem valor',
-		'not_found':'Não encontrou item para esta pesquisa.'
+		'tools':'Herramientas <span class="caret"></span>',
+		'help':'Ayuda <span class="caret"></span>',
+		'no_value':'Sin valor',
+		'not_found':'No encontró ningún resultado.'
 	}
 
 };

@@ -63,7 +63,9 @@ var Translation={
 		'refresh_data':'Repetir a carga dos dados.',
 		'no_data':'Sem dados para exibir. ',
 		'tools': 'Ferramentas <span class="caret"></span>',
-		'help' : 'Ajuda'
+		'help' : 'Ajuda <span class="caret"></span>',
+		'video': 'Video Introdutório',
+		'about': 'Sobre'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -129,7 +131,9 @@ var Translation={
 		'refresh_data':'Try to load data.',
 		'no_data':'No data to show. ',
 		'tools': 'Tools <span class="caret"></span>',
-		'help' : 'Help'
+		'help' : 'Help <span class="caret"></span>',
+		'video': 'Introductory Video',
+		'about': 'About'
 	},
 	'es':{		
 		/* texts into HTML entities */
@@ -195,7 +199,9 @@ var Translation={
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. ',
 		'tools': 'Herramientas <span class="caret"></span>',
-		'help': 'Ayuda'
+		'help': 'Ayuda <span class="caret"></span>',
+		'video': 'Video Introductorio',
+		'about': 'Sobre'
 	}
 
 };
