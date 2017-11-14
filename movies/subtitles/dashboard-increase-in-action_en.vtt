@@ -2,24 +2,32 @@ WEBVTT
 
 1
 00:00:00.000 --> 00:00:13.000
-Filters in action
+Toolbar
 
 2
 00:00:14.000 --> 00:00:16.000
 Informations about data
 
 3
-00:00:17.000 --> 00:00:19.000
-Download tool
+00:00:17.000 --> 00:00:55.000
+Filters in action
 
 4
-00:00:20.000 --> 00:00:22.000
-Print tool
+00:00:56.000 --> 00:00:59.000
+Chart export tool
 
 5
-00:00:23.000 --> 00:00:24.000
-Style tool
+00:01:00.000 --> 00:01:06.000
+Download tool
 
 6
-00:00:25.000 --> 00:00:32.000
-Chart export tool
+00:01:07.000 --> 00:01:10.000
+Print tool
+
+7
+00:01:11.000 --> 00:01:14.000
+Style tool (exchange dark/light)
+
+8
+00:01:15.000 --> 00:01:20.000
+Map access

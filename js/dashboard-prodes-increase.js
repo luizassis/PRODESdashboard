@@ -464,7 +464,9 @@ var graph={
 			var texts=chart.selectAll('g.row text');
 			var rankMun=utils.getMunOrder();
 			texts[0].forEach(function(t){
-				t.innerHTML=rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '+t.innerHTML;
+				var p=(rankMun["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
+				t.innerHTML=p+t.innerHTML;
+				//t.innerHTML=rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '+t.innerHTML;
 			});
 		});
 		
@@ -540,40 +542,22 @@ var graph={
 	},
 	prepareTools: function() {
 		// build download data
-		d3.select('#downloadTableBtn')
+		d3.select('#download-csv')
 	    .on('click', function() {
-	    	var ufs=[],years=[],rates=[];
 	    	
-	    	graph.data2csv.forEach(function(d) {
-	    		if(ufs.indexOf(d.uf)<0){
-	    			ufs.push(d.uf);
-	    			rates[d.uf]=[]
-	    		}
-	    		if(years.indexOf(d.year)<0){
-	    			years.push(d.year);
-	    		}
-	    		
-    			rates[d.uf][d.year]=d.originalRate;
-			});
-	    	var csv=[],aux={};
-	    	ufs.forEach(function(u) {
-		    	years.forEach(function(y) {
-		    		if(aux[y]) {
-		    			c=aux[y];
-		    		}else{
-		    			var c={};
-		    			c['year']=y;
-		    			aux[y]=c;
-		    		}
-		    		c[u]=rates[u][y];
-		    	});
-	    	});
-	    	for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-
-	        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
 	        var dt=new Date();
 	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-	        saveAs(blob, 'prodes_rates_'+dt+'.csv');
+	        saveAs(blob, 'prodes_increase_filtered_'+dt+'.csv');
+		});
+
+		d3.select('#download-csv-all')
+	    .on('click', function() {
+
+	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
+	        var dt=new Date();
+	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+	        saveAs(blob, 'prodes_increase_'+dt+'.csv');
 	    });
 		
 		d3.select('#prepare_print')
