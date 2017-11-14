@@ -61,11 +61,22 @@
 							</li>							
 						</ul>			
 					</li>
-					<li>
-						<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-							<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="help">Ajuda</span>
-						</a>
-					</li>
+					<li class="dropdown inverse-dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="help">Ajuda <span class="caret"></span></span></a>
+						<ul class="dropdown-menu">							
+							<li>
+								<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
+									<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="video">Video Introdutório</span>
+								</a>
+							</li>				
+							<li class="divider"></li>
+							<li>
+								<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe.">
+									<span id="btn_style" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;<span id="about">Sobre</span>
+								</a>
+							</li>			
+						</ul>			
+					</li>					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
@@ -244,8 +255,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="modal-footer">
-								
+							<div class="modal-footer">								
 								<button type="button" class="btn btn-default" data-dismiss="modal">
 									<span id="txt29">Fechar</span>
 								</button> 
@@ -253,7 +263,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- modal window with information and video to help about this panel -->
+				<!-- modal window with an introductory video of this panel -->
 				<div class="modal fade" id="modal-container-video" role="dialog" aria-labelledby="video-rates" aria-hidden="true">
 					<div class="modal-dialog" style="width:830px;">
 						<div class="modal-content">
@@ -273,7 +283,7 @@
 											<track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
 											<track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
 											<track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
-											Your browser does not support the video tag.
+											Seu navegador não suporta a tag de vídeo.
 										</video>
 								</div>
 							</div>
@@ -281,6 +291,23 @@
 								<button type="button" class="btn btn-default" data-dismiss="modal">
 									<span id="txt1e">Fechar</span>
 								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- modal window about the project -->
+				<div class="modal fade" id="modal-container-about" role="dialog" aria-labelledby="about-rates" aria-hidden="true">
+					<div class="modal-dialog" style="width:830px;">
+						<div class="modal-content">
+							<div class="modal-header">
+							  	<center><h1 class="modal-title" id="about-rates">PRODES - TerraBrasilis</h1></center>
+							</div>
+							<div class="modal-body">
+								<iframe src="dashboard-about.html" width="800" height="600" frameborder="0"></iframe>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="">Fechar</button>
 							</div>
 						</div>
 					</div>
