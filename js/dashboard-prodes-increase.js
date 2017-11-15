@@ -264,7 +264,7 @@ var graph={
 		}else {
 			utils.displayGraphContainer();
 		
-			var o=[];
+			var o=[],csv=[];
 			for (var j = 0, n = data.totalFeatures; j < n; ++j) {
 				var fet=data.features[j];
 				var uc=(fet.properties.j)?(fet.properties.j+"/"+fet.properties.h):(null)
@@ -278,14 +278,25 @@ var graph={
 					uc:uc,
 					cl:fet.properties.c
 				});
+				csv.push({
+					year:+fet.properties.g,
+					areaTotal:+fet.properties.d,
+					areaMun:+fet.properties.e,
+					areaUc:+fet.properties.f,
+					uf:fet.properties.h,
+					municipio:fet.properties.i,
+					uc:fet.properties.j,
+					classe:fet.properties.c
+				});
 			}
 			data = o;
+			graph.data=data;
+			graph.data2csv=csv;
 			graph.registerDataOnCrossfilter(data);
 			graph.build();
 		}
 	},
 	registerDataOnCrossfilter: function(data) {
-		graph.data=data;
 		var ndx = crossfilter(data);
 
 		this.yearDimension = ndx.dimension(function(d) {
@@ -466,7 +477,6 @@ var graph={
 			texts[0].forEach(function(t){
 				var p=(rankMun["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
 				t.innerHTML=p+t.innerHTML;
-				//t.innerHTML=rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '+t.innerHTML;
 			});
 		});
 		
@@ -544,8 +554,24 @@ var graph={
 		// build download data
 		d3.select('#download-csv')
 	    .on('click', function() {
-	    	
-	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
+
+			var filteredData=graph.yearDimension.top(Infinity),
+			csv=[];
+			filteredData.forEach(function(d) {
+				var m=d.mun.split("/"),
+				u=(d.uc)?(d.uc.split("/")):(null);
+				csv.push({
+					year:d.year,
+					areaTotal:d.aTotal,
+					areaMun:d.aMun,
+					areaUc:d.aUc,
+					uf:d.uf,
+					municipio:m[0],
+					uc:(u)?(u[0]):(''),
+					classe:d.cl
+				});
+			});
+	        var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
 	        var dt=new Date();
 	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
 	        saveAs(blob, 'prodes_increase_filtered_'+dt+'.csv');
@@ -554,7 +580,7 @@ var graph={
 		d3.select('#download-csv-all')
 	    .on('click', function() {
 
-	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
+	        var blob = new Blob([d3.csv.format(graph.data2csv)], {type: "text/csv;charset=utf-8"});
 	        var dt=new Date();
 	    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
 	        saveAs(blob, 'prodes_increase_'+dt+'.csv');
