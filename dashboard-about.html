@@ -5,13 +5,14 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<meta http-equiv="refresh" content="0;url=dashboard-about.html">-->
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./libs/bootstrap/bootstrap-4.0.0-beta-2.min.css" rel="stylesheet">
+    <link href="./libs/bootstrap/bootstrap-4.0.0-beta-2.min.css" rel="stylesheet">   
     
   </head>
 
@@ -20,55 +21,45 @@
     <!-- Page Content -->
     <div class="container">
 
-      <h1 class="my-4">Visão  </h1>
+      <h1 class="my-4"><span id="tb-view">Visão  </span></h1>
       <p>
-          O projeto TerraBrasilis refere-se a uma camada de serviços sobre um banco de dados geográfico, acessada através de  um portal web, que vem sendo conduzido pelo INPE, visando melhorar o acesso e o uso dos dados produzidos nos programas de monitoramento ambiental pelos quais responde. Em um primeiro momento visa atender principalmente ao  Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet. 
-
-          Para a implementação do TerraBrasilis em projetos de monitoramento,  deve-se considerar vários aspectos tecnológicos gerais, bem como as especificidades desse tipo de projeto. Dentre esses desafios podem ser citados os seguintes:
-          <ul>
-            <li> <strong>Banco de Dados:</strong> é necessário resolver as questões relativas ao projeto e implementação de um servidor de banco de dados geográfico robusto para suportar a inclusão de todo o conjunto de dados a ser servido, incluindo os dados de observação da Terra e os dados temáticos produzidos a partir deles.
-            <li> <strong>Dinâmica no espaço e  no tempo:</strong> em geral as aplicações geográficas estão preparadas para apresentar e analisar dados em instantes de tempo pré-definidos em uma certa região do espaço. É um desafio nessas aplicações um tratamento da dinâmica dos dados não apenas no espaço, mas também no tempo. A análise de dados de monitoramento ambiental sem considerar a dinâmica no tempo é muito pobre e por isso, no TerraBrasilis visa disponibilizar funcionalidades para explorar a componente temporal dos dados de monitoramento sistemático ao longo do tempo. Por exemplo: além de apenas apresentar o dado do PRODES de um dado ano,  pode-se desejar observar uma animação dos desmatamentos detectados ao longo dos últimos 10 anos, em uma determinada região.
-            <li> <strong>Interoperabilidade:</strong> é necessário que os dados de monitoramento ambiental possam ser acessados via uma arquitetura de serviços, usando os conceitos de Infraestruturas de Dados Espaciais, de maneira que possam ser integrados em outros portais de acesso e organizações como por exemplo, a Infraestrutura Nacional de Dados Espaciais – INDE. A INDE é uma iniciativa do governo brasileiro com o propósito de catalogar, integrar e harmonizar dados geoespaciais existentes nas instituições do governo brasileiro, produtoras e mantenedoras desse tipo de dado, de maneira que possam ser facilmente localizados, explorados e acessados para os mais diversos usos, por qualquer cliente que tenha acesso à Internet.
-            <li> <strong>Metadados:</strong> é necessário estudar e prover a documentação sintática e semântica dos dados de monitoramento produzidos. A descrição semântica de classes, informações de proveniência, uso pretendido, restrições de uso, entre outras informações, deve ser explícita e parte de mecanismos de busca e seleção. Esses também devem ser oferecidos de acordos com padrões adotados na comunidade de geoinformática.
-            <li> <strong>Análises:</strong> a organização das bases de dados segundo padrões de interoperabilidades permite a construção de análise mais sofisticadas diretamente no portal de disseminação, usando o TerraBrasilis. A sobreposição de dados de diferentes projetos já é um tipo de análise. O TerraBrasilis deve suportar a definição de áreas de interesse sejam pré-definidas (ex. um certo município) ou criadas por edição pelo usuário. Para uma certa área de interesse podem ser feitas consultas baseadas em operações de álgebra de mapas entre camadas, sumarização de dados em gráficos (barra, torta), e outras que devem ser projetadas de acordo com as particularidades do projeto de monitoramento, .
-            <li> <strong>Acesso personalizado por classes de usuários:</strong> o TerraBrasilis irá permitir a definição de classes de usuários as quais podem ser usadas por exemplo, para restringir o acesso a dados, ou fornecer análise mais complexas ou mais simplificadas facilitando a usabilidade do sistema.              
-          </ul>
-
-          Finalmente, deve-se notar que todos os problemas e indicações de solução não são úteis somente na disseminação dos dados de monitoramento do Programa Amazônia. Ao contrário, o monitoramento de outros biomas, dentro de outros projetos vai  aumentar o volume e a diversidade dos dados processados e também dos dados temáticos produzidos. Por isso, é importante que a questão da gerência de dados e das ferramentas de acesso e disseminação sejam parte de sua concepção, com o devido aporte de profissionais de tecnologia da informação e recursos computacionais.
-
-
+          <span id="tb-view-text">
+             
+        </span>
       </p>
 
-      <h1 class="my-4">Apoio </h1>
+      <h1 class="my-4"><span id="tb-support">Apoio </span></h1>
       <ul>
         <li><span id="support-inpe">Instituto Nacional de Pesquisas Espaciais (INPE)</span>
         <li><span id="support-funcate">Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)</span>
         <li><span id="support-fundep">Fundação de Desenvolvimento da Pesquisa (FUNDEP)</span>
+        <li><span id="support-world-bank">Grupo Banco Mundial</span>
+        <li><span id="support-bndes">Banco Nacional de Desenvolvimento (BNDES)</span>
       </ul>
 
       <!-- Board Members Row -->
       <div class="row">
         <div class="col-lg-12">
-          <h2 class="my-4">Equipe de Coordenadores </h2>
+          <h2 class="my-4"><span id="co-team-role">Equipe de Coordenadores </span></h2>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_karine.png" width="200" height="200" alt="Karine">
           <h5><strong>Karine Reis Ferreira</strong><br/>
-            <small>Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</small>
+            <small><span id="karine-role">Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</span></small>
           </h5>
           <p></p>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_lubia.jpg" width="200" height="200" alt="Lubia">
           <h5><strong>Lubia Vinhas </strong><br/>
-            <small>Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</small>
+            <small><span id="lubia-role">Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</span></small>
           </h5>
           <p></p>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_maurano.png" width="200" height="200" alt="Maurano">
           <h5><strong>Luis Eduardo Pinheiro Maurano </strong><br/>
-            <small>Tecnologista Sênior da Divisão de Processamento de Imagens (DIDPI) do INPE</small>
+            <small><span id="maurano-role">Tecnologista Sênior da Divisão de Processamento de Imagens (DIDPI) do INPE</span></small>
           </h5>
           <p></p>
         </div>
@@ -77,39 +68,39 @@
       <!-- IT Members Row -->
       <div class="row">
         <div class="col-lg-12">
-          <h2 class="my-4">Equipe de TI</h2>
+          <h2 class="my-4"><span id="ti-team-role">Equipe de TI</span></h2>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_andre.jpg" width="200" height="200" alt="Andre">
           <h5><strong>André Carvalho</strong><br/>
-            <small>Analista de Sistemas</small>
+            <small><span id="andre-role">Analista de Sistemas</span></small>
           </h5>
           <p></p>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_fabio.jpg" width="200" height="200" alt="Fabio">
           <h5><strong>Fábio da Conceição Pinheiro</strong><br/>
-            <small>Adminstrador de Banco de Dados</small>
+            <small><span id="fabio-role">Adminstrador de Banco de Dados</span></small>
           </h5>
           <p></p>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_jether.jpg" width="200" height="200" alt="Jether">
           <h5><strong>Jether Rodrigues do Nascimento</strong><br/>
-            <small>Gerente de Desenvolvimento de Software Sênior</small>
+            <small><span id="jether-role">Gerente de Desenvolvimento de Software Sênior</span></small>
           </h5>
           <p></p>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
           <img class="rounded-circle img-fluid d-block mx-auto" src="img/perfil_luiz.png" width="200" height="200" alt="Luiz">
           <h5><strong>Luiz Fernando F. G. de Assis</strong><br/>
-            <small>Desenvolvedor de Software Pleno</small>
+            <small><span id="luiz-role">Desenvolvedor de Software</span></small>
           </h5>
           <p></p>
         </div>
       </div>
 
-      <h1 class="my-4">Contribuidores e ex-membros  </h1>
+      <h1><span id="contrib">Contribuidores e ex-membros </span></h1>
       <ul>
           <li>Claudio Bogossian
           <li>Gustavo Furtado
@@ -117,35 +108,41 @@
           <li>Marcos Alexandre
       </ul>
 
-      <h1 class="my-4">Tecnologias <br/>
-        <small>Platformas/Software/Bibliotecas </small>
+      <h1><span id="tech">Tecnologias </span><br/>
+        <small><span id="tech-plat">Platformas/Software/Bibliotecas </span></small>
       </h1>
       <p>
         <ul>
-          <li>  MongoDB (configurações do Terrabrasilis) 
-          <li>  MySQL (banco da app uploadData)          
-          <li>  SQLite (banco de metadados usado pelo software PyCSW) 
-          <li>  PostgreSQL/PostGIS (vários bancos com dados vetoriais) 
-          <li>  Cliente de sincronização de dados DETER-B (aplicação PHP) 
-          <li>  Shell script (geração de cache e deploy)
-          <li> Apache Tomcat 7 (java 7 openJDK) 
+          <li>  MongoDB
+          <li>  MySQL 
+          <li>  SQLite 
+          <li>  PostgreSQL/PostGIS 
+          <li>  PHP
+          <li> Apache Tomcat 7 
           <ul>
-            <li>  GeoServer (6 instâncias) 
-            <li>  TerraBrasilis (1 instância) 
-            <li>  TerraMobileServer (1 instância) 
+            <li>  GeoServer
           </ul>
           <li>  Apache 2 HTTPD 
           <ul>  
-            <li>  uploadData (1 instância) 
-            <li>  publishData (1 instância) 
-            <li>  PyCSW (1 instância) 
+            <li>  PyCSW
           </ul>
-          <li>  Nginx (proxy) 
+          <li>  Nginx
           <li>  R-Server 
           <ul>
-            <li>  Shiny apps
+            <li>  Shiny
           </ul>
+          <li> ExtJS
+          <li> GeoExtJS
+          <li> Javascript
+            <ul> 
+              <li> d3.js
+              <li> dc.js
+              <li> jquery.js 
+              <li> bootstrap.js  
+            </ul>          
       </p>
+
+      <span id="license">Essas aplicações são oferecidas e distribuídas por terceiros sob seus próprios termos de licença.</span>
 
     </div>
     <!-- /.container -->
@@ -155,8 +152,12 @@
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; TerraBrasilis 2017 </p>
       </div>
-      <!-- /.container -->
+      <!-- /.container -->      
     </footer>
+
+    <script type="text/javascript" src="./js/dashboard-about.js"></script>
+    <script type="text/javascript" src="./js/dashboard-translation-about.js"></script>
+    <script type="text/javascript" src="./js/dashboard-change-lang.js"></script>  
     
   </body>
 

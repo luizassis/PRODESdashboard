@@ -10,10 +10,12 @@ var Lang={
 		var f;
 		for (i in this.languages) {
 			f=this.getObj('flag-'+this.languages[i]);
+			if(!f) break;
 			f.style.border='none';
 			f.style.borderRadius='50%';
 		}
 		f=this.getObj('flag-'+this.language);
+		if(!f) return;
 		f.style.border='2px solid white';
 		f.style.borderRadius='unset';
 	},

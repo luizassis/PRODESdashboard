@@ -40,6 +40,7 @@ var Translation={
 		'txt31':'Imprimir',
 		'warning-txt':'2017 deforestation rate is still an estimation.',
 		/* titles for HTML entities */
+		'about-close':"Fechar",
 		'panel_swap':'Ir para o painel de consulta a taxas anuais de desmatamento.',
 		'downloadBtn':'Baixar a tabela de incrementos de desmatamento em formato CSV.',
 		'prepare_print':'Imprimir esta página utilizando recurso do navegador.',
@@ -118,6 +119,7 @@ var Translation={
 		'txt31':'Print',
 		"warning-txt":'2017 deforestation rate is still an estimation.',
 		/* titles for HTML entities */
+		'about-close':"Close",
 		'panel_swap':'Go to the deforestation increment rate panel.',
 		'downloadBtn':'Download the deforestation rates table in a CSV format.',
 		'prepare_print':'Print this page using browser resources.',
@@ -196,6 +198,7 @@ var Translation={
 		'txt31':'Imprimir',
 		'warning-txt':'Tasa de deforestación en 2017 sigue siendo una estimación.',
 		/* titles for HTML entities */
+		'about-close':"Cerrar",
 		'panel_swap':'Ir al panel de consulta a tasas anuales de deforestación.',
 		'downloadBtn':'Descargar la tabla de incrementos de deforestación en formato CSV.',
 		'prepare_print':'Imprimir esta página utilizando las capacidades del navegador.',
