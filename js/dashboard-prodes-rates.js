@@ -792,6 +792,7 @@ var graph={
 	},
 	jsLanguageChange: function() {
 		var callback = function() {
+			$("#iframe-about").attr("src", "dashboard-about.html");
 			graph.build();
 		};
 		d3.select('#flag-pt-br')
