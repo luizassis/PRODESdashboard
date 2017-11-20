@@ -17,8 +17,8 @@ var Translation={
         'support-world-bank':'Grupo do Banco Mundial',
         'tb-support':'Apoio',
         'tb-view':'Visão',
-        'tb-view-text':'<p>O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser'+ 'adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet.</p>'+
-        '<p>Mais informações sobre o TerraBrasilis, veja em: http://terrabrasilis.info/</p>',
+        'tb-view-text':'<p>O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser'+ ' adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet.</p>'+
+        '<p>Mais informações sobre o TerraBrasilis, veja em: <a href="http://terrabrasilis.info/">http://terrabrasilis.info/</a></p>',
         'tech':'Tecnologias',
         'tech-plat':'Platformas/Software/Bibliotecas ',
         'ti-team-role':'Equipe de TI'
@@ -42,7 +42,7 @@ var Translation={
         'tb-support':'Support',
         'tb-view':'Vision',
         'tb-view-text':'<p>TerraBrasilis is a platform developed by INPE to organize, access and use throughout a web portal of geographical data produced by its environmental monitoring programs. At first, it focus mainly on the Amazon Program, but the concept and software packages produced can be'+ ' adapted and customized to meet other projects that produce geographic data and aim to be accessible in the internet environment.'+
-        '<p>More information about TerraBrasilis, see: http://terrabrasilis.info/</p>',
+        '<p>More information about TerraBrasilis, see: <a href="http://terrabrasilis.info/">http://terrabrasilis.info/</a></p>',
         'tech':'Technology',
         'tech-plat':'Platforms/Software/Libraries',
         'ti-team-role':'IT team'
@@ -66,7 +66,7 @@ var Translation={
         'tb-support':'Apoyo',
         'tb-view':'Visión',
         'tb-view-text':'<p>TerraBrasilis es una plataforma desarrollada por el INPE para organización, acceso y uso a través de un portal web de los datos geográficos producidos por sus programas de monitoreo ambiental. En un primer momento pretende atender principalmente al Programa Amazonía, pero el concepto y los paquetes de software producidos pueden ser'+ ' adaptados y personalizados para atender a otros proyectos que produzem datos geográficos y que pretenden que estos puedan ser accedidos en el ambiente de internet.</p>'+
-        '<p>Más información sobre TerraBrasilis, visite: http://terrabrasilis.info/.</p>',
+        '<p>Más información sobre TerraBrasilis, visite: <a href="http://terrabrasilis.info/">http://terrabrasilis.info/</a>.</p>',
         'tech':'Tecnologías',
         'tech-plat':'Plataformas/Software/Bibliotecas',
         'ti-team-role':'Equipo de TI'
